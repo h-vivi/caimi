@@ -57,6 +57,7 @@
   @import '~styles/vars.less';
 
   .user {
+    color: @color-deep;
     height: 1.92rem;
     padding: 0.32rem 0.4rem 0.26rem;
     font-size: @font-size-large;
@@ -90,7 +91,11 @@
       background-size: 100%;
     }
   }
-
+  .image-list[type='1'] {
+      .image-list-item {
+          width: 100%;
+      }
+  }
   .image-list[type='2'] {
     .image-list-item {
       width: 49%;
@@ -123,10 +128,12 @@
     width: 9.2rem;
     padding: 0.66rem 0;
     margin: 0 auto;
+    line-height: 0.53rem;
     border-bottom: 1px solid @color-light;
   }
 
   .opr {
+    color: @color-middle;
     padding: 0.4rem;
     height: 1.3rem;
     font-size: @font-size-middle;
@@ -150,5 +157,5 @@
   .image {
     width: 100%;
   }
-  
+
 </style>
