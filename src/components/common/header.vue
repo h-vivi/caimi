@@ -55,7 +55,7 @@
         position: relative;
         display: inline-block;
         min-width: 1.33rem;
-        margin-right: 1.06rem;
+        margin: 0 1.06rem 0 0;
         border-bottom: 1px solid transparent;
         top: -1px;
 

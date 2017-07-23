@@ -42,7 +42,7 @@
       width: 1rem;
       text-align: center;
       .xicon {
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.1rem;
       }
       &.xicon-add {
         height: 100%;
