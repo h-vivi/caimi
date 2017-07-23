@@ -7,14 +7,21 @@
     <div class="content" :class="{ 'verify-mode': inVerifyMode }">
       <form class="info-form">
         <div class="xinput-wrapper">
-          <input type="text" class="xinput" value="" placeholder="请输入手机号">
+          <input type="text" v-model="phone" class="xinput" placeholder="请输入手机号">
         </div>
         <div class="xinput-wrapper with-verify">
-          <input type="text" class="xinput" value="" :placeholder="loginInExtra.placeholder">
-          <div class="verify-code">发送验证码</div>
+          <template v-if="inVerifyMode">
+            <input type="text" v-model="psw" class="xinput" :placeholder="loginInExtra.placeholder">
+          </template>
+          <template v-else>
+            <input type="password" v-model="psw" class="xinput" :placeholder="loginInExtra.placeholder">
+          </template>
+          <div class="verify-code" :class="{ 'disabled': disableGetVerify }" @click="sendVerifyCode">
+            {{ disableGetVerify ? `重新发送(${curTime}s)` : '发送验证码' }}
+          </div>
         </div>
 
-        <input type="button" class="xbtn-large login-btn" value="登录">
+        <input type="button" class="xbtn xbtn-large login-btn" value="登录" @click="loginAction">
       </form>
       <div class="extras">
         <router-link class="account" :to="{ name: loginInExtra.path }">{{ loginInExtra.name }}</router-link>
@@ -25,14 +32,68 @@
 </template>
 
 <script>
+  import { getVerifyCode, loginViaVerifyCode, loginViaPsw } from '@/api'
+
   export default {
     name: 'login',
     data () {
-      return { }
+      return {
+        phone: '',
+        psw: '',
+        curTime: 0,
+        disableGetVerify: false
+      }
     },
     methods: {
       back () {
         this.$router.back()
+      },
+      sendVerifyCode () {
+        if (this.disableGetVerify) {
+          return
+        }
+        getVerifyCode({ phone: this.phone })
+          .then(res => {
+            res = res.data
+
+            if (!res.success) {
+              return
+            }
+
+            this.disableGetVerify = true
+            this.curTime = 59
+            this.verifyTimer = setInterval(_ => {
+              this.curTime --
+
+              if (this.curTime === 0) {
+                clearInterval(this.verifyTimer)
+                this.disableGetVerify = false
+              }
+            }, 1000)
+          })
+        .catch(ex => { /* Ignore */ })
+      },
+      loginAction () {
+        if (!this.phone || !this.psw) {
+          return
+        }
+        let method = loginViaVerifyCode
+        if (!this.inVerifyMode) {
+          method = loginViaPsw
+        }
+        method({ phone: this.phone, verifyCode: this.psw })
+          .then(res => {
+            res = res.data
+            if (!res.success) {
+              return
+            }
+          })
+        .catch(ex => { /* Ignore */ })
+      }
+    },
+    watch: {
+      '$route': function () {
+        this.psw = ''
       }
     },
     computed: {
@@ -40,10 +101,19 @@
         return this.$route.name === 'login::verify'
       },
       loginInExtra () {
+        if (!this.inVerifyMode) {
+          return {
+            path: 'login::verify',
+            name: '免密码登录',
+            placeholder: '请输入密码',
+            verifyType: 'password'
+          }
+        }
         return {
-          path: this.inVerifyMode ? 'login::psw' : 'login::verify',
-          name: this.inVerifyMode ? '账号密码登录' : '免密码登录',
-          placeholder: this.inVerifyMode ? '请输入验证码' : '请输入密码'
+          path: 'login::psw',
+          name: '账号密码登录',
+          placeholder: '请输入验证码',
+          verifyType: 'text'
         }
       }
     }
@@ -57,85 +127,92 @@
   .login {
     color: @color-deep;
     font-size: @font-size-larger;
+  }
 
-    .top {
-      margin-top: 0.58rem;
-      margin-bottom: 2.97rem;
-      height: 0.62rem;
-      line-height: 0.62rem;
-      overflow: hidden;
+  .top {
+    margin-top: 0.58rem;
+    margin-bottom: 2.97rem;
+    height: 0.62rem;
+    line-height: 0.62rem;
+    overflow: hidden;
 
-      .back {
-        float: left;
-        margin-left: 0.4rem;
-      }
-
-      .new-account {
-        float: right;
-        margin-right: 0.4rem;
-      }
+    .back {
+      float: left;
+      margin-left: 0.4rem;
     }
 
-    .content {
-      width: 7.73rem;
-      margin: 0 auto;
+    .new-account {
+      float: right;
+      margin-right: 0.4rem;
+    }
+  }
 
-      &.verify-mode {
-        .with-verify {
-          .xinput {
-            padding-right: 2.6rem;
-          }
-        }
+  .content {
+    width: 7.73rem;
+    margin: 0 auto;
 
-        .verify-code {
-          display: block;
-          position: absolute;
-          right: 0;
-          bottom: 0.18rem;
-          width: 2.4rem;
-          height: 0.74rem;
-          line-height: 0.74rem;
-          border: 1px dashed #77daf7;
-          border-radius: 1rem;
-          text-align: center;
-          color: #77daf7;
+    &.verify-mode {
+      .with-verify {
+        .xinput {
+          padding-right: 2.6rem;
         }
       }
+
+      .verify-code {
+        display: block;
+        position: absolute;
+        right: 0;
+        bottom: 0.18rem;
+        width: 2.4rem;
+        height: 0.74rem;
+        line-height: 0.74rem;
+        border: 1px dashed #77daf7;
+        border-radius: 1rem;
+        text-align: center;
+        color: #77daf7;
+        font-size: @font-size-small;
+
+        &.disabled {
+          border-style: solid;
+          border-color: @color-light;
+          color: @color-middle;
+        }
+      }
+    }
+  }
+
+  .info-form {
+    font-size: @font-size-large;
+  }
+
+  .xinput-wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.6rem;
+    
+    &.with-verify {
+      margin-bottom: 1.6rem;
     }
 
-    .info-form {
-      font-size: @font-size-large;
+    .xinput {
+      width: 100%;
+    }
+  }
+
+  .verify-code {
+    display: none;
+  }
+
+  .extras {
+    margin-top: 0.66rem;
+    overflow: hidden;
+
+    .account {
+      float: left;
     }
 
-    .xinput-wrapper {
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 0.6rem;
-      
-      &.with-verify {
-        margin-bottom: 1.6rem;
-      }
-
-      .xinput {
-        width: 100%;
-      }
-    }
-
-    .verify-code {
-      display: none;
-    }
-
-    .extras {
-      margin-top: 0.66rem;
-      overflow: hidden;
-
-      .account {
-        float: left;
-      }
-
-      .forget {
-        float: right;
-      }
+    .forget {
+      float: right;
     }
   }
 </style>

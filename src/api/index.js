@@ -5,6 +5,7 @@
 
 import axios from 'axios'
 
+// axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://api.caimixinli.com/serverapi/'
 
 export const getCategories = function () {
@@ -13,4 +14,16 @@ export const getCategories = function () {
 
 export const getEssayList = function ({ pageNo, code }) {
   return axios.get(`content/queryContent?pageNo=${pageNo}&categoryCode=${code}`)
+}
+
+export const getVerifyCode = function ({ phone }) {
+  return axios.get(`userlogin/getPhoneCheckCode?phone=${phone}`)
+}
+
+export const loginViaVerifyCode = function ({ phone, verifyCode }) {
+  return axios.get(`userlogin/loginNoPassword?phone=${phone}&phoneCheckCode=${verifyCode}`)
+}
+
+export const loginViaPsw = function ({ phone, psw }) {
+  return axios.get(`userlogin/loginPassword?phone=${phone}&password=${psw}`)
 }

@@ -9,10 +9,10 @@
       <p class="mine-sign">登录彩米</p>
     </div>
     <ul class="mine-setting-module" >
-      <setting-item v-for="setting in settings1" :item="setting"></setting-item>
+      <setting-item v-for="(setting, index) in settings1" :item="setting" :key="index"></setting-item>
     </ul>
     <ul class="mine-setting-module" >
-      <setting-item v-for="setting in settings2" :item="setting"></setting-item>
+      <setting-item v-for="(setting, index) in settings2" :item="setting" :key="index"></setting-item>
     </ul>
 
   </div>
