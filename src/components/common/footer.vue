@@ -42,13 +42,16 @@
       width: 1rem;
       text-align: center;
       .xicon {
-        margin-bottom: 0.1rem;
+        margin-bottom: 0.2rem;
       }
       &.xicon-add {
         height: 100%;
       }
       &.router-link-active {
         color: #fff;
+      }
+      .name {
+          display: block;
       }
     }
   }
