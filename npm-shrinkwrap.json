@@ -101,11 +101,6 @@
       "from": "arr-flatten@>=1.0.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/arr-flatten/-/arr-flatten-1.1.0.tgz"
     },
-    "array-find-index": {
-      "version": "1.0.2",
-      "from": "array-find-index@>=1.0.2 <2.0.0",
-      "resolved": "https://registry.npm.taobao.org/array-find-index/download/array-find-index-1.0.2.tgz"
-    },
     "array-flatten": {
       "version": "1.1.1",
       "from": "array-flatten@1.1.1",
@@ -2317,11 +2312,6 @@
       "from": "minimist@0.0.8",
       "resolved": "https://registry.npm.taobao.org/minimist/download/minimist-0.0.8.tgz"
     },
-    "mint-ui": {
-      "version": "2.2.7",
-      "from": "mint-ui@latest",
-      "resolved": "https://registry.npmjs.org/mint-ui/-/mint-ui-2.2.7.tgz"
-    },
     "mkdirp": {
       "version": "0.5.1",
       "from": "mkdirp@>=0.5.1 <0.6.0",
@@ -3741,11 +3731,6 @@
       "from": "querystring-es3@>=0.2.0 <0.3.0",
       "resolved": "https://registry.npm.taobao.org/querystring-es3/download/querystring-es3-0.2.1.tgz"
     },
-    "raf.js": {
-      "version": "0.0.4",
-      "from": "raf.js@0.0.4",
-      "resolved": "https://registry.npmjs.org/raf.js/-/raf.js-0.0.4.tgz"
-    },
     "randomatic": {
       "version": "1.1.7",
       "from": "randomatic@>=1.1.3 <2.0.0",
@@ -4513,10 +4498,10 @@
       "from": "vue-hot-reload-api@>=2.1.0 <3.0.0",
       "resolved": "https://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.1.0.tgz"
     },
-    "vue-lazyload": {
-      "version": "1.0.6",
-      "from": "vue-lazyload@>=1.0.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/vue-lazyload/-/vue-lazyload-1.0.6.tgz"
+    "vue-material": {
+      "version": "0.7.4",
+      "from": "vue-material@latest",
+      "resolved": "https://registry.npm.taobao.org/vue-material/download/vue-material-0.7.4.tgz"
     },
     "vue-router": {
       "version": "2.7.0",

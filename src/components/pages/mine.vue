@@ -1,6 +1,9 @@
 <template>
   <div class="s">
     设置页面
+    <md-avatar>
+      <img src="../../assets/logo.png" alt="Avatar">
+    </md-avatar>
   </div>
 </template>
 
