@@ -42,8 +42,8 @@ export default new Router({
           component: List
         },
         {
-          path: 'setting',
-          name: 's::setting',
+          path: 'mine',
+          name: 's::mine',
           component: Setting
         }
       ]

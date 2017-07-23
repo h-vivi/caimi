@@ -8,7 +8,7 @@
     <div class="footer-item add">
       <i class="xicon xicon-add"></i>
     </div>
-    <router-link class="footer-item mine" :to="{ name: 's::setting' }">
+    <router-link class="footer-item mine" :to="{ name: 's::mine' }">
       <i class="xicon xicon-mine"></i>
       <br>
       <span class="name">我的</span>
