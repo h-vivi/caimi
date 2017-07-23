@@ -34,6 +34,7 @@ export default new Router({
       path: '/s',
       name: 's',
       component: S,
+      redirect: { name: 's::list' },
       children: [
         {
           path: 'list',

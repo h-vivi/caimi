@@ -40,7 +40,6 @@
       right: 0;
       bottom: 0;
       height: 1.33rem;
-      // line-height: 1.33rem;
       z-index: 2;
     }
   }
