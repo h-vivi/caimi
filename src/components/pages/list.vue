@@ -114,6 +114,7 @@
     beforeMount () {
       getCategories()
         .then(res => {
+          res = res.data
           if (!res.success) {
             return
           }
