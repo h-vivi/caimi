@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="top">
-      <div class="back xicon" @click="back">返回</div>
+      <div class="back xicon xicon-back" @click="back"></div>
       <router-link class="new-account" :to="{ name: 'psw' }">注册</router-link>
     </div>
     <div class="content" :class="{ 'verify-mode': inVerifyMode }">
@@ -189,7 +189,7 @@
     position: relative;
     overflow: hidden;
     margin-bottom: 0.6rem;
-    
+
     &.with-verify {
       margin-bottom: 1.6rem;
     }
