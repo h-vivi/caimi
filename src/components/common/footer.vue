@@ -1,16 +1,18 @@
 <template>
   <footer class="footer">
-    <div class="footer-item main">
+    <router-link class="footer-item main" :to="{ name: 's::list' }">
       <i class="xicon xicon-main"></i>
-      <div class="name">首页</div>
-    </div>
+      <br>
+      <span class="name">首页</span>
+    </router-link>
     <div class="footer-item add">
       <i class="xicon xicon-add"></i>
     </div>
-    <div class="footer-item mine">
+    <router-link class="footer-item mine" :to="{ name: 's::setting' }">
       <i class="xicon xicon-mine"></i>
-      <div class="mine">我的</div>
-    </div>
+      <br>
+      <span class="name">我的</span>
+    </router-link>
   </footer>
 </template>
 
@@ -34,7 +36,6 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    // padding: 0.26rem 0.33rem 0.13rem;
 
     .footer-item {
       float: left;
@@ -45,7 +46,10 @@
       }
       &.xicon-add {
         height: 100%;
-      } 
+      }
+      &.router-link-active {
+        color: #fff;
+      }
     }
   }
 </style>
