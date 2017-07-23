@@ -5,7 +5,7 @@ import Login from '@/components/pages/login'
 import Psw from '@/components/pages/psw'
 import S from '@/components/pages/s'
 import List from '@/components/pages/list'
-import Setting from '@/components/pages/setting'
+import Mine from '@/components/pages/mine'
 import Hello from '@/components/Hello'
 
 Vue.use(Router)
@@ -44,7 +44,7 @@ export default new Router({
         {
           path: 'mine',
           name: 's::mine',
-          component: Setting
+          component: Mine
         }
       ]
     },
