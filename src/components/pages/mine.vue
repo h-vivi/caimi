@@ -1,24 +1,94 @@
 <template>
-  <div class="s">
-    设置页面
-    <md-avatar>
-      <img src="../../assets/logo.png" alt="Avatar">
-    </md-avatar>
+  <div class="mine">
+    <div class="mine-info">
+      <div class="mine-info-top">
+        <h2>我的</h2>
+      </div>
+      <div class="mine-avatar">
+      </div>
+      <p class="mine-sign">登录彩米</p>
+    </div>
+    <ul class="mine-setting-module" >
+      <setting-item v-for="setting in settings1" :item="setting"></setting-item>
+    </ul>
+    <ul class="mine-setting-module" >
+      <setting-item v-for="setting in settings2" :item="setting"></setting-item>
+    </ul>
+
   </div>
 </template>
 
 <script>
+  import SettingItem from '@/components/common/setting-item'
+
   export default {
     name: 's',
     data () {
       return {
-        msg: ''
+        settings1: [
+          {
+            name: '我的故事',
+            icon: '../../assets/xicon-story.png'
+          },
+          {
+            name: '我的收藏',
+            icon: '../../assets/xicon-collect.png'
+          },
+          {
+            name: '我的赞',
+            icon: '../../assets/xicon-up-setting.png'
+          },
+          {
+            name: '我的问答',
+            icon: '../../assets/xicon-answer.png'
+          }
+        ],
+        settings2: [
+          {
+            name: '设置',
+            icon: ''
+          }
+        ]
       }
+    },
+    components: {
+      SettingItem
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-
+  @import '~styles/vars.less';
+  .mine {
+      background: @color-light;
+  }
+  .mine-info {
+      height: 5.8rem;
+      background: #fff;
+      .mine-info-top {
+        color: #fff;
+        height: 1.94rem;
+        padding-top: 0.4rem;
+        text-align: center;
+        background: @color-deep;
+      }
+      .mine-avatar {
+        width: 2.67rem;
+        height: 2.67rem;
+        border-radius: 50%;
+        margin: -0.6rem auto 0;
+        background: pink;
+      }
+      .mine-sign {
+        color: @color-middle;
+        font-size: @font-size-middle;
+        text-align: center;
+      }
+  }
+  .mine-setting-module {
+    margin-top: 0.26rem;
+    background: #fff;
+    padding: 0 0.2rem 0 0.4rem;
+  }
 </style>
