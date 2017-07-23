@@ -1,0 +1,79 @@
+/**
+ * define basic styles
+ * bqliu | 07/22/2017
+ */
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+
+  body {
+    position: relative;
+    height: 100%;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;;
+  }
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  border: none;
+  display: inline-block;
+}
+
+.optimize-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+.xicon {
+  vertical-align: middle;
+  display: inline-block;
+  background-size: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.xicon-up {
+  width: 0.48rem;
+  height: 0.5rem;
+  background-image: url(../assets/xicon-up.png);
+}
+.xicon-up--liked {
+  width: 0.48rem;
+  height: 0.5rem;
+  background-image: url(../assets/xicon-up-liked.png);
+}
+
+.xicon-comment {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-image: url(../assets/xicon-comment.png);
+}
+
+.xicon-main {
+  width: 0.34rem; // 26px;
+  height: 0.53rem; // 40px;
+  background-image: url(../assets/xicon-main.png);
+}
+
+.xicon-add {
+  width: 0.61rem; // 45px;
+  height: 0.61rem; // 45px;
+  background-image: url(../assets/xicon-add.png);
+}
+
+.xicon-mine {
+  width: 0.4rem; // 30px;
+  height: 0.52rem; // 39px
+  background-image: url(../assets/xicon-mine.png);
+}
