@@ -23,12 +23,28 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      redirect: { name: 'login::psw' },
+      children: [
+        {
+          path: 'psw',
+          name: 'login::psw'
+        },
+        {
+          path: 'verify',
+          name: 'login::verify'
+        }
+      ]
     },
     {
       path: '/psw',
       name: 'psw',
       component: Psw
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Login
     },
     {
       path: '/s',

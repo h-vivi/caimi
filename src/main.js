@@ -12,6 +12,7 @@ import store from './store'
 import './styles/basic.less'
 import './styles/roboto-italic.less'
 import './styles/vue-material-icon.less'
+import 'vue-material/dist/vue-material.css'
 
 sync(store, router)
 Vue.use(VueMaterial)

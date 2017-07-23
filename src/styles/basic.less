@@ -3,6 +3,8 @@
  * bqliu | 07/22/2017
  */
 
+@import './vars.less';
+
 html {
   height: 100%;
   box-sizing: border-box;
@@ -47,6 +49,25 @@ h1,h2,h3,h4,h5 {
 
 .optimize-scroll {
   -webkit-overflow-scrolling: touch;
+}
+
+.xinput {
+  height: 1rem;
+  border: none;
+  border-bottom: 1px solid @color-middle;
+  outline: none;
+  padding: 0 0 0 2px;
+  border-radius: 0;
+}
+
+.xbtn-large {
+  width: 100%;
+  height: 1.06rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: @color-deep;
+  color: #fff;
+  font-size: @font-size-larger;
 }
 
 .xicon {
