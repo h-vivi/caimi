@@ -52,7 +52,7 @@ exports.cssLoaders = function (options) {
     css: generateLoaders(),
     postcss: generateLoaders(),
     less: generateLoaders('less', {
-      plugins: [ ]
+      plugins: [ /*new LessPluginFunctions()*/ ]
     }),
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),

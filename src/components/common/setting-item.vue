@@ -41,8 +41,6 @@ export default {
       background-repeat: no-repeat;
       background-position: 0 center;
       margin-right: 0.1rem;
-
-
     }
     .setting-name {
       float: left;
