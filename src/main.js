@@ -3,19 +3,19 @@
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 import 'normalize.css'
-import VueMaterial from 'vue-material'
+// import VueMaterial from 'vue-material'
 
 import App from './App'
 import router from './router'
 import store from './store'
 
+// import './styles/roboto-italic.less'
+// import './styles/vue-material-icon.less'
+// import 'vue-material/dist/vue-material.css'
 import './styles/basic.less'
-import './styles/roboto-italic.less'
-import './styles/vue-material-icon.less'
-import 'vue-material/dist/vue-material.css'
 
 sync(store, router)
-Vue.use(VueMaterial)
+// Vue.use(VueMaterial)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

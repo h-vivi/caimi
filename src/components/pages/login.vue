@@ -89,12 +89,21 @@
             }
           })
         .catch(ex => { /* Ignore */ })
+      },
+      gc () {
+        clearInterval(this.verifyTimer)
+        this.curTime = 0
       }
     },
     watch: {
       '$route': function () {
         this.psw = ''
+        this.disableGetVerify = false
+        this.gc()
       }
+    },
+    beforeRouteLeave (to, from, next) {
+      this.gc()
     },
     computed: {
       inVerifyMode () {
