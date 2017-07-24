@@ -5,7 +5,7 @@
 
 import axios from 'axios'
 
-// axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://api.caimixinli.com/serverapi/'
 
 export const getCategories = function () {

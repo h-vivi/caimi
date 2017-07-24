@@ -12,7 +12,11 @@
       <setting-item v-for="(setting, index) in settings1" :item="setting" :key="index"></setting-item>
     </ul>
     <ul class="mine-setting-module" >
-      <setting-item v-for="(setting, index) in settings2" :item="setting" :key="index"></setting-item>
+      <setting-item
+        v-for="(setting, index) in settings2"
+        :item="setting"
+        :key="index"
+      ></setting-item>
     </ul>
 
   </div>
@@ -28,25 +32,25 @@
         settings1: [
           {
             name: '我的故事',
-            icon: '../../assets/xicon-story.png'
+            icon: 'story'
           },
           {
             name: '我的收藏',
-            icon: '../../assets/xicon-collect.png'
+            icon: 'collect'
           },
           {
             name: '我的赞',
-            icon: '../../assets/xicon-up-setting.png'
+            icon: 'honor'
           },
           {
             name: '我的问答',
-            icon: '../../assets/xicon-answer.png'
+            icon: 'ask'
           }
         ],
         settings2: [
           {
             name: '设置',
-            icon: ''
+            icon: 'set'
           }
         ]
       }
