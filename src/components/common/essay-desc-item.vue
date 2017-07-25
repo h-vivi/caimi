@@ -9,11 +9,13 @@
           <template v-else>+&nbsp;关注</template>
         </div>
       </div>
-      <div class="image-list" :type="item.images.length" >
-        <img class="image-list-item" :index="index" v-for="(image, index) in item.images" :src="image">
-        <div :class="{ 'has-voice': item.hasVoice }"></div>
+      <div class="content-wrapper" @click="handleOnContentClick">
+        <div class="image-list" :type="item.images.length" >
+          <img class="image-list-item" :index="index" v-for="(image, index) in item.images" :src="image">
+          <div :class="{ 'has-voice': item.hasVoice }"></div>
+        </div>
+        <div class="desc">{{ item.content }}</div>
       </div>
-      <div class="desc">{{ item.content }}</div>
       <div class="opr">
         <div class="up">
           <i class="xicon xicon-up" :class="{ 'xicon-up--liked': item.like }"></i>
@@ -47,6 +49,11 @@
         default () {
           return { userInfo: { }, images: [ ] }
         }
+      }
+    },
+    methods: {
+      handleOnContentClick () {
+        this.$emit('item-content-click', this.item)
       }
     }
   }

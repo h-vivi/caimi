@@ -5,7 +5,7 @@
       <essay-desc-item
         class="essay-desc-item"
         v-for="essay in essays"
-        @click="toDetail(essay)"
+        @item-content-click="toDetail(essay)"
         :item="essay"
         :key="essay.contentId"
       ></essay-desc-item>
@@ -50,7 +50,6 @@
         }
       },
       toDetail (essay) {
-        console.log('ex')
         this.$router.push({ name: 'detail', params: { id: essay.contentId } })
       },
       loadEassy () {

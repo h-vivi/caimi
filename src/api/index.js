@@ -27,3 +27,7 @@ export const loginViaVerifyCode = function ({ phone, verifyCode }) {
 export const loginViaPsw = function ({ phone, psw }) {
   return axios.get(`userlogin/loginPassword?phone=${phone}&password=${psw}`)
 }
+
+export const getEssayDetail = function ({ contentId }) {
+  return axios.get(`detail/contentDetail?contentId=${contentId}`)
+}

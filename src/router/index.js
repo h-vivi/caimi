@@ -6,7 +6,8 @@ import Psw from '@/components/pages/psw'
 import S from '@/components/pages/s'
 import List from '@/components/pages/list'
 import Mine from '@/components/pages/mine'
-import Hello from '@/components/Hello'
+import Detail from '@/components/pages/detail'
+// import Hello from '@/components/Hello'
 
 Vue.use(Router)
 
@@ -56,7 +57,7 @@ export default new Router({
     {
       path: '/detail/:id',
       name: 'detail',
-      component: Hello
+      component: Detail
     },
     {
       path: '*',
