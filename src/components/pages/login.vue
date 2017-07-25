@@ -24,8 +24,8 @@
         <input type="button" class="xbtn xbtn-large login-btn" value="登录" @click="loginAction">
       </form>
       <div class="extras">
-        <router-link class="account" :to="{ name: loginInExtra.path }">{{ loginInExtra.name }}</router-link>
-        <router-link class="forget" :to="{ name: 'psw' }">忘记密码</router-link>
+        <router-link class="account" :to="{ query: loginInExtra.query }">{{ loginInExtra.name }}</router-link>
+        <router-link class="forget" :to="{ name: 'login' }">忘记密码</router-link>
       </div>
     </div>
   </div>
@@ -104,22 +104,23 @@
     },
     beforeRouteLeave (to, from, next) {
       this.gc()
+      next()
     },
     computed: {
       inVerifyMode () {
-        return this.$route.name === 'login::verify'
+        return this.$route.query.verify === true
       },
       loginInExtra () {
         if (!this.inVerifyMode) {
           return {
-            path: 'login::verify',
+            query: { verify: true },
             name: '免密码登录',
             placeholder: '请输入密码',
             verifyType: 'password'
           }
         }
         return {
-          path: 'login::psw',
+          query: { verify: false },
           name: '账号密码登录',
           placeholder: '请输入验证码',
           verifyType: 'text'

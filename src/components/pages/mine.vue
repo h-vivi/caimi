@@ -4,9 +4,8 @@
       <div class="mine-info-top">
         <h2>我的</h2>
       </div>
-      <div class="mine-avatar">
-      </div>
-      <p class="mine-sign">登录彩米</p>
+      <div class="mine-avatar"></div>
+      <router-link class="mine-sign" :to="{ name: 'login' }">登录彩米</router-link>
     </div>
     <ul class="mine-setting-module" >
       <setting-item v-for="(setting, index) in settings1" :item="setting" :key="index"></setting-item>
@@ -85,6 +84,9 @@
         background: pink;
       }
       .mine-sign {
+        display: inline-block;
+        width: 100%;
+        margin-top: 0.69rem;
         color: @color-middle;
         font-size: @font-size-middle;
         text-align: center;

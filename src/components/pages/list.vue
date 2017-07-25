@@ -2,7 +2,13 @@
   <div class="list">
     <x-header class="header" :items="categories" @to-certain-item="toItem"></x-header>
     <div class="essays optimize-scroll" @scroll="loadEassy">
-      <essay-desc-item class="essay-desc-item" v-for="essay in essays" :item="essay" :key="essay.contentId"></essay-desc-item>
+      <essay-desc-item
+        class="essay-desc-item"
+        v-for="essay in essays"
+        @click="toDetail(essay)"
+        :item="essay"
+        :key="essay.contentId"
+      ></essay-desc-item>
     </div>
   </div>
 </template>
@@ -42,6 +48,10 @@
         if (categories.length > 0) {
           this.toItem({ code: categories[0].code })
         }
+      },
+      toDetail (essay) {
+        console.log('ex')
+        this.$router.push({ name: 'detail', params: { id: essay.contentId } })
       },
       loadEassy () {
         const category = this.categories.find(x => x.active)
