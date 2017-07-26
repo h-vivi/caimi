@@ -1,30 +1,44 @@
 <template>
   <div class="detail">
-    <div class="detail-wrapper">
-      <div class="header">
-        <div class="back xicon xicon-back-white"></div>
-        <h2 class="detail-head">详情</h2>
-      </div>
-      <user-header :user-info="userInfo">2017.7.12 16:40</user-header>
-      <div class="content-wrapper">
-        <div class="audio-wrapper">
-          <img src="" alt="">
-          <audio></audio>
+    <div class="header">
+      <div class="back xicon xicon-back-white" @click="back"></div>
+      <h2 class="detail-head">详情</h2>
+    </div>
+    <div class="dummy-detail-wrapper">
+      <div class="detail-wrapper">
+        <user-header class="detail-item" :user-info="userInfo">2017.7.12 16:40</user-header>
+        <div class="detail-item content-wrapper">
+          <div class="audio-wrapper">
+            <img src="" alt="">
+            <audio></audio>
+          </div>
+          <div class="essay-content">
+            <div class="text-content">{{ essayDetail.content }}</div>
+            <gallery :images="essayDetail.images"></gallery>
+          </div>
         </div>
-        <div class="text-content">{{ essayDetail.content }}</div>
-        <gallery :images="essayDetail.images"></gallery>
-      </div>
-      <div class="essay-opr">
-        <i class="xicon xicon-up"></i>
-        <i class="xicon xicon-collect"></i>
+        <div class="detail-item essay-opr">
+          <div class="opr-item">
+            <i class="xicon xicon-up--b"></i>
+            <span>{{ essayDetail.likeNum }}</span>
+          </div>
+          <div class="opr-item">
+            <i class="xicon xicon-collect--b"></i>
+            <span>{{ essayDetail.collectNum }}</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="comments">
-      <comment-item
-        v-for="(item, index) in comment.items"
-        :key="index"
-        :comment="item"
-      ></comment-item>
+      <div class="comment-desc">最新评论 共{{comment.items.length}}条</div>
+      <div class="comment-items">
+        <comment-item
+          class="comment-item"
+          v-for="(item, index) in comment.items"
+          :key="index"
+          :comment="item"
+        ></comment-item>
+      </div>
     </div>
   </div>
 </template>
@@ -65,7 +79,11 @@
         recommendWords: [ ]
       }
     },
-    methods: { },
+    methods: {
+      back () {
+        this.$router.back()
+      }
+    },
     components: {
       UserHeader,
       Gallery,
@@ -93,12 +111,40 @@
 <style scoped lang="less">
   @import '~styles/vars.less';
 
+  @common-gap: 0.66rem;
+
   .detail {
     height: 100%;
-    padding: 0 0.4rem;
     overflow-x: hidden;
     overflow-y: auto;
   }
+
+  .dummy-detail-wrapper {
+    background-color: #e0e0e0;
+    overflow: hidden;
+  }
+
+  .detail-wrapper {
+    padding-top: 1.17rem;
+    padding-bottom: 0.53rem;
+    margin-bottom: 0.26rem;
+    background-color: #fff;
+
+    .detail-item {
+      padding: 0 0.4rem;
+    }
+
+    .user-header {
+      height: 1.87rem; // 3.04rem;
+      padding: 0.26rem 0.4rem;
+      border-bottom: 1px solid @color-light;
+    }
+  }
+
+  .comments {
+    background-color: #fff;
+  }
+
   .header {
     width: 100%;
     color: #fff;
@@ -120,14 +166,49 @@
     }
   }
 
-  .user-header {
-    height: 3.04rem;
-    padding: 1.43rem 0 0.26rem 0;
-    border-bottom: 1px solid @color-light;
-  }
-
   .audio-wrapper {
     height: 1.97rem;
-    padding: 0.66rem 0;
+    padding: @common-gap 0;
+  }
+
+  .essay-content {
+    padding: @common-gap 0;
+  }
+
+  .essay-opr {
+    display: flex;
+    justify-content: flex-end;
+    color: @color-middle;
+
+    .opr-item {
+      margin-right: 0.4rem;
+      .xicon {
+        margin-right: 0.02rem;
+      }
+    }
+  }
+
+  .comments {
+    .comment-desc {
+      height: 0.8rem;
+      line-height: 0.8rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .comment-desc,
+    .comment-items {
+      padding: 0 0.4rem;
+    }
+
+    .comment-items {
+      padding: @common-gap;
+
+      .comment-item {
+        margin-bottom: @common-gap;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
 </style>
