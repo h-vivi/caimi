@@ -8,9 +8,8 @@
       <div class="detail-wrapper">
         <user-header class="detail-item" :user-info="userInfo">2017.7.12 16:40</user-header>
         <div class="detail-item content-wrapper">
-          <div class="audio-wrapper">
-            <img src="" alt="">
-            <audio></audio>
+          <div class="xaudio-wrapper">
+            <x-audio></x-audio>
           </div>
           <div class="essay-content">
             <div class="text-content">{{ essayDetail.content }}</div>
@@ -46,6 +45,7 @@
 <script>
   import { getEssayDetail } from '@/api'
   import UserHeader from '@/components/common/user-header'
+  import XAudio from '@/components/common/x-audio'
   import Gallery from '@/components/common/gallery'
   import CommentItem from '@/components/common/comment-item'
 
@@ -86,6 +86,7 @@
     },
     components: {
       UserHeader,
+      XAudio,
       Gallery,
       CommentItem
     },
@@ -166,7 +167,7 @@
     }
   }
 
-  .audio-wrapper {
+  .xaudio-wrapper {
     height: 1.97rem;
     padding: @common-gap 0;
   }
