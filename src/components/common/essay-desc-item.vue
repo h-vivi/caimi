@@ -10,8 +10,8 @@
         </div>
       </div>
       <div class="content-wrapper" @click="handleOnContentClick">
-        <div class="image-list" :type="item.images.length" >
-          <img class="image-list-item" :index="index" v-for="(image, index) in item.images" :src="image">
+        <div class="gallery-wrapper">
+          <gallery :images="item.images"></gallery>
           <div :class="{ 'has-voice': item.hasVoice }"></div>
         </div>
         <div class="desc">{{ item.content }}</div>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+  import Gallery from '@/components/common/gallery'
+
   export default {
     name: 'essay-desc-item',
     data () {
@@ -50,6 +52,9 @@
           return { userInfo: { }, images: [ ] }
         }
       }
+    },
+    components: {
+      Gallery
     },
     methods: {
       handleOnContentClick () {
@@ -86,7 +91,7 @@
     }
   }
 
-  .image-list {
+  .gallery-wrapper {
     position: relative;
     .has-voice {
       position: absolute;
@@ -99,9 +104,9 @@
     }
   }
   .image-list[type='1'] {
-      .image-list-item {
-          width: 100%;
-      }
+    .image-list-item {
+      width: 100%;
+    }
   }
   .image-list[type='2'] {
     .image-list-item {

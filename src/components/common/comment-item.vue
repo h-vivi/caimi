@@ -1,6 +1,8 @@
 <template>
   <div class="comment">
-    <avatar class="comment-user-avatar"><img :src="comment.commentUserInfo.avatar"></avatar>
+    <avatar class="comment-user-avatar">
+      <img :src="comment.commentUserInfo.avatar">
+    </avatar>
     <div class="center-wrapper">
       <div class="names">
         <span class="from">{{ comment.commentUserInfo.nickName }}</span>

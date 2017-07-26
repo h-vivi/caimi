@@ -83,6 +83,7 @@
         }
         method({ phone: this.phone, verifyCode: this.psw })
           .then(res => {
+            console.log(res)
             res = res.data
             if (!res.success) {
               return
@@ -108,7 +109,8 @@
     },
     computed: {
       inVerifyMode () {
-        return this.$route.query.verify === true
+        return this.$route.query.verify === true ||
+          this.$route.query.verify === 'true'
       },
       loginInExtra () {
         if (!this.inVerifyMode) {
