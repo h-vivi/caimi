@@ -31,6 +31,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+  @import '~styles/vars.less';
 
   .user-header {
     display: flex;
@@ -42,10 +43,21 @@
 
     .center-wrapper {
       margin-right: auto;
+      color: @color-middle;
+      font-size: @font-size-middle;
 
       .name {
         margin-bottom: 0.2rem;
+        color: @color-deep;
+        font-size: @font-size-large;
       }
+    }
+
+    .right-wrapper {
+      color: @color-deep;
+      font-size: @font-size-middle;
+      display: flex;
+      align-items: center;
     }
   }
 

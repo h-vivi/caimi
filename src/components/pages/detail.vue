@@ -2,12 +2,13 @@
   <div class="detail">
     <div class="detail-wrapper">
       <div class="header">
-        <div>返回</div>
-        <h2>详情</h2>
+        <div class="back xicon xicon-back-white"></div>
+        <h2 class="detail-head">详情</h2>
       </div>
       <user-header :user-info="userInfo">2017.7.12 16:40</user-header>
       <div class="content-wrapper">
         <div class="audio-wrapper">
+          <img src="" alt="">
           <audio></audio>
         </div>
         <div class="text-content">{{ essayDetail.content }}</div>
@@ -90,9 +91,43 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+  @import '~styles/vars.less';
+
   .detail {
     height: 100%;
+    padding: 0 0.4rem;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+  .header {
+    width: 100%;
+    color: #fff;
+    height: 1.17rem;
+    line-height: 1.17rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background: @color-deep;
+    padding: 0 0.26rem;
+    .back {
+      height: 1.17rem;
+      float: left;
+    }
+    .detail-head {
+      text-align: center;
+    }
+  }
+
+  .user-header {
+    height: 3.04rem;
+    padding: 1.43rem 0 0.26rem 0;
+    border-bottom: 1px solid @color-light;
+  }
+
+  .audio-wrapper {
+    height: 1.97rem;
+    padding: 0.66rem 0;
   }
 </style>

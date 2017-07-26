@@ -152,14 +152,14 @@
       left: 0;
       right: 0;
       top: 0;
-      height: 1.2rem;
-      line-height: 1.2rem;
+      height: 1.17rem;
+      line-height: 1.17rem;
       z-index: 2;
     }
     .essays {
       position: relative;
       height: 100%;
-      padding-top: 1.2rem;
+      padding-top: 1.17rem;
       overflow-x: hidden;
       overflow-y: auto;
       z-index: 1;
