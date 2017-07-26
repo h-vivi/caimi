@@ -7,10 +7,7 @@
       </div>
       <user-header :user-info="userInfo">2017.7.12 16:40</user-header>
       <div class="content-wrapper">
-        <div class="audio-wrapper">
-          <img src="" alt="">
-          <audio></audio>
-        </div>
+        <x-audio></x-audio>
         <div class="text-content">{{ essayDetail.content }}</div>
         <gallery :images="essayDetail.images"></gallery>
       </div>
@@ -32,6 +29,7 @@
 <script>
   import { getEssayDetail } from '@/api'
   import UserHeader from '@/components/common/user-header'
+  import XAudio from '@/components/common/x-audio'
   import Gallery from '@/components/common/gallery'
   import CommentItem from '@/components/common/comment-item'
 
@@ -68,6 +66,7 @@
     methods: { },
     components: {
       UserHeader,
+      XAudio,
       Gallery,
       CommentItem
     },
@@ -126,8 +125,4 @@
     border-bottom: 1px solid @color-light;
   }
 
-  .audio-wrapper {
-    height: 1.97rem;
-    padding: 0.66rem 0;
-  }
 </style>
