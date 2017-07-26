@@ -3,9 +3,9 @@
     <div class="desc">
       <slot></slot>
     </div>
-    <div :class="'images mode-' + ximages.length">
+    <div :class="'images mode-' + images.length">
       <img
-        v-for="(img, index) in ximages"
+        v-for="(img, index) in images"
         :key="index"
         :src="img"
         :class="'image-item ' + 'image-item-' + index"
@@ -17,12 +17,6 @@
 <script>
   export default {
     name: 'gallery',
-
-    computed: {
-      ximages () {
-        return [ ].concat(this.images).concat(this.images[0])
-      }
-    },
 
     props: {
       images: {
