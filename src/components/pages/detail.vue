@@ -1,9 +1,6 @@
 <template>
-  <div class="detail">
-    <div class="header">
-      <div class="back xicon xicon-back-white" @click="back"></div>
-      <h2 class="detail-head">详情</h2>
-    </div>
+  <div class="detail optimize-scroll">
+    <header-with-back>详情</header-with-back>
     <div class="dummy-detail-wrapper">
       <div class="detail-wrapper">
         <user-header class="detail-item" :user-info="userInfo">2017.7.12 16:40</user-header>
@@ -48,6 +45,7 @@
   import XAudio from '@/components/common/x-audio'
   import Gallery from '@/components/common/gallery'
   import CommentItem from '@/components/common/comment-item'
+  import HeaderWithBack from '@/components/common/header-with-back'
 
   export default {
     name: 'detail',
@@ -88,7 +86,8 @@
       UserHeader,
       XAudio,
       Gallery,
-      CommentItem
+      CommentItem,
+      HeaderWithBack
     },
     beforeMount () {
       getEssayDetail({ contentId: this.$route.params.id })
@@ -144,27 +143,6 @@
 
   .comments {
     background-color: #fff;
-  }
-
-  .header {
-    width: 100%;
-    color: #fff;
-    height: 1.17rem;
-    line-height: 1.17rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2;
-    background: @color-deep;
-    padding: 0 0.26rem;
-    .back {
-      height: 1.17rem;
-      float: left;
-    }
-    .detail-head {
-      text-align: center;
-    }
   }
 
   .xaudio-wrapper {
