@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 import 'normalize.css'
-// import VueMaterial from 'vue-material'
+import MintUI from 'mint-ui'
 
 import App from './App'
 import router from './router'
@@ -11,11 +11,11 @@ import store from './store'
 
 // import './styles/roboto-italic.less'
 // import './styles/vue-material-icon.less'
-// import 'vue-material/dist/vue-material.css'
+import 'mint-ui/lib/style.css'
 import './styles/basic.less'
 
 sync(store, router)
-// Vue.use(VueMaterial)
+Vue.use(MintUI)
 Vue.config.productionTip = false
 
 window.$router = router
