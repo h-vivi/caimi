@@ -24,7 +24,8 @@
         <input type="button" class="xbtn xbtn-large login-btn" value="登录" @click="loginAction">
       </form>
       <div class="extras">
-        <router-link class="account" :to="{ query: loginInExtra.query }">{{ loginInExtra.name }}</router-link>
+        <div class="account" @click="toggleExtraLoginMtd">{{ loginInExtra.name }}</div>
+        <!-- <router-link class="account" :to="{ query: loginInExtra.query }">{{ loginInExtra.name }}</router-link> -->
         <router-link class="forget" :to="{ name: 'login' }">忘记密码</router-link>
       </div>
     </div>
@@ -41,12 +42,16 @@
         phone: '',
         psw: '',
         curTime: 0,
-        disableGetVerify: false
+        disableGetVerify: false,
+        inVerifyMode: false
       }
     },
     methods: {
       back () {
         this.$router.back()
+      },
+      toggleExtraLoginMtd () {
+        this.inVerifyMode = !this.inVerifyMode
       },
       sendVerifyCode () {
         if (this.disableGetVerify) {
@@ -108,10 +113,10 @@
       next()
     },
     computed: {
-      inVerifyMode () {
-        return this.$route.query.verify === true ||
-          this.$route.query.verify === 'true'
-      },
+      // inVerifyMode () {
+        // return this.$route.query.verify === true ||
+          // this.$route.query.verify === 'true'
+      // },
       loginInExtra () {
         if (!this.inVerifyMode) {
           return {
