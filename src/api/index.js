@@ -8,11 +8,11 @@ import axios from 'axios'
 // axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://api.caimixinli.com/serverapi/'
 
-export const getCategories = function () {
+export const loadCategories = function () {
   return axios.get('http://api.caimixinli.com/serverapi/config/init')
 }
 
-export const getEssayList = function ({ pageNo, code }) {
+export const loadEssayList = function ({ pageNo, code }) {
   return axios.get(`content/queryContent?pageNo=${pageNo}&categoryCode=${code}`)
 }
 

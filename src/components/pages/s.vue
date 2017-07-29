@@ -13,7 +13,6 @@
     data () {
       return { }
     },
-    methods: { },
     components: {
       XFooter
     }

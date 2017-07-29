@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <x-header class="header" :items="categories" @to-certain-item="toItem"></x-header>
-    <div class="essays optimize-scroll" @scroll="loadEassy">
+    <div class="essays optimize-scroll" @scroll="scrollLoad">
       <essay-desc-item
         class="essay-desc-item"
         v-for="essay in essays"
@@ -14,8 +14,8 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
-  import { getCategories, getEssayList } from '@/api'
+  import { mapGetters, mapMutations } from 'vuex'
+  import { loadCategories, loadEssayList } from '@/api'
   import XHeader from '@/components/common/header'
   import EssayDescItem from '@/components/common/essay-desc-item'
   import { scrollTop, validScrollLoad } from '@/utils'
@@ -24,52 +24,55 @@
     name: 's',
     data () {
       return {
-        essays: [ ],
         loading: false
       }
     },
     computed: {
-      ...mapGetters([ 'categories' ])
+      ...mapGetters([ 'categories', 'essays', 'essayListScrollY' ]),
+      essayListDom () {
+        return this.$el.querySelector('.essays')
+      }
     },
     components: {
       XHeader,
       EssayDescItem
     },
     methods: {
-      ...mapActions([ 'setCategories' ]),
+      ...mapMutations([ 'SET_CATEGORIES', 'SET_START_IMAGE', 'SET_ESSAYS', 'SET_ESSAY_LIST_SCROLL_Y' ]),
       handleStart ({ imageUrl, referrer, categories }) {
         categories = categories.map(x => ({
           name: x.categoryName,
           code: x.categoryCode
         }))
 
-        this.setCategories(categories)
+        this.SET_CATEGORIES({ categories })
 
         if (categories.length > 0) {
-          this.toItem({ code: categories[0].code })
+          this.toItem({ item: categories[0], first: true })
         }
       },
       toDetail (essay) {
         this.$router.push({ name: 'detail', params: { id: essay.contentId } })
       },
-      loadEassy () {
+      scrollLoad () {
+        this.SET_ESSAY_LIST_SCROLL_Y(this.$el.querySelector('.essays').scrollTop)
         const category = this.categories.find(x => x.active)
         if (!category) {
           return
         }
-        if (!validScrollLoad(this.$el.querySelector('.essays'))) {
+        if (!validScrollLoad(this.essayListDom)) {
           return
         }
-        if (category.end) {
-          return
-        }
-        if (this.loading) {
-          return
+        this.loadEssays(category, this.essays)
+      },
+      loadEssays (category, initial = [ ]) {
+        if (category.end || this.loading) {
+          return Promise.resolve()
         }
 
         category.pageNo += 1
         this.loading = true
-        getEssayList(category)
+        return loadEssayList(category)
           .then(res => {
             res = res.data
             if (!res.success) {
@@ -80,8 +83,9 @@
               throw new Error('end')
             }
 
-            this.essays = this.essays.concat(res.data.items)
-            console.log(this.essays)
+            const essays = initial.concat(res.data.items)
+
+            this.SET_ESSAYS({ essays })
             this.loading = false
           })
           .catch(ex => {
@@ -89,39 +93,32 @@
             this.loading = false
           })
       },
-      toItem ({ code }) {
-        const category = this.categories.find(x => x.code === code)
-        if (!category) {
+      toItem ({ item, first }) {
+        if (!item) {
           return
         }
-        category.pageNo = 0
-        category.end = false
-        this.loading = true
-        getEssayList(category)
+        item.pageNo = -1
+        item.end = false
+        this.loadEssays(item)
           .then(res => {
-            res = res.data
-            if (!res.success) {
-              return
-            }
             const categories = this.categories.map(x => {
-              x.active = x.code === code
+              x.active = x.code === item.code
               return x
             })
+            this.SET_CATEGORIES({ categories: categories })
 
-            this.setCategories(categories)
-
-            this.essays = res.data.items
-
-            scrollTop(this.$el.querySelector('.essays'))
-            this.loading = false
-          })
-          .catch(ex => {
-            this.loading = false
+            !first && scrollTop(this.$el.querySelector('.essays'))
           })
       }
     },
     beforeMount () {
-      getCategories()
+      if (this.categories.length && this.essays) {
+        this.$nextTick(_ => {
+          scrollTop(this.essayListDom, this.essayListScrollY)
+        })
+        return
+      }
+      loadCategories()
         .then(res => {
           res = res.data
           if (!res.success) {

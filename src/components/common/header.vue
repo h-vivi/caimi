@@ -5,7 +5,7 @@
         class="list-item"
         :class="{ 'active': item.active }"
         v-for="item in items"
-        @click="handleClick(item.code)"
+        @click="handleClick(item)"
       >{{ item.name }}</li>
     </ul>
   </header>
@@ -14,12 +14,9 @@
 <script>
   export default {
     name: 'header',
-    data () {
-      return { }
-    },
     methods: {
-      handleClick (code) {
-        this.$emit('to-certain-item', { code })
+      handleClick (item) {
+        this.$emit('to-certain-item', { item })
       }
     },
     props: {
