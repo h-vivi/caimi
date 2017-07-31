@@ -8,12 +8,14 @@ import MintUI from 'mint-ui'
 import App from './App'
 import router from './router'
 import store from './store'
+import promiseFinally from 'promise.prototype.finally'
 
 // import './styles/roboto-italic.less'
 // import './styles/vue-material-icon.less'
 import 'mint-ui/lib/style.css'
 import './styles/basic.less'
 
+promiseFinally.shim()
 sync(store, router)
 Vue.use(MintUI)
 Vue.config.productionTip = false

@@ -74,7 +74,6 @@
         this.loading = true
         return loadEssayList(category)
           .then(res => {
-            res = res.data
             if (!res.success) {
               throw new Error('fail')
             }
@@ -120,7 +119,6 @@
       }
       loadCategories()
         .then(res => {
-          res = res.data
           if (!res.success) {
             return
           }

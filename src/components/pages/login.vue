@@ -52,6 +52,9 @@
       },
       toggleExtraLoginMtd () {
         this.inVerifyMode = !this.inVerifyMode
+        this.psw = ''
+        this.disableGetVerify = false
+        this.gc()
       },
       sendVerifyCode () {
         if (this.disableGetVerify) {
@@ -59,8 +62,6 @@
         }
         getVerifyCode({ phone: this.phone })
           .then(res => {
-            res = res.data
-
             if (!res.success) {
               return
             }
@@ -88,24 +89,16 @@
         }
         method({ phone: this.phone, verifyCode: this.psw })
           .then(res => {
-            console.log(res)
-            res = res.data
             if (!res.success) {
               return
             }
+            this.$router.push({ name: 's' })
           })
         .catch(ex => { /* Ignore */ })
       },
       gc () {
         clearInterval(this.verifyTimer)
         this.curTime = 0
-      }
-    },
-    watch: {
-      '$route': function () {
-        this.psw = ''
-        this.disableGetVerify = false
-        this.gc()
       }
     },
     beforeRouteLeave (to, from, next) {
