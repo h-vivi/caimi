@@ -92,7 +92,6 @@
     beforeMount () {
       getEssayDetail({ contentId: this.$route.params.id })
         .then(res => {
-          res = res.data
           if (!res.success) {
             return
           }
