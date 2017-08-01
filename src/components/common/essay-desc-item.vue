@@ -1,14 +1,7 @@
 <template>
   <div class="essay-desc-item">
     <template v-if="item.type === 'content'">
-      <div class="user">
-        <img class="avatar" :src="item.userInfo.avatar">
-        <div class="name">{{ item.userInfo.nickName }}</div>
-        <div class="follow" @click="followUser(item)">
-          <template v-if="item.userInfo.follow">已关注</template>
-          <template v-else>+&nbsp;关注</template>
-        </div>
-      </div>
+    <user-header class="user-header-container" :user-info="item.userInfo"></user-header>
       <div class="content-wrapper" @click="handleOnContentClick">
         <div class="gallery-wrapper">
           <gallery :images="item.images"></gallery>
@@ -41,6 +34,7 @@
 <script>
   import Gallery from '@/components/common/gallery'
   import { submitFollowUser } from '@/api'
+  import UserHeader from '@/components/common/user-header'
 
   export default {
     name: 'essay-desc-item',
@@ -55,7 +49,8 @@
       }
     },
     components: {
-      Gallery
+      Gallery,
+      UserHeader
     },
     methods: {
       handleOnContentClick () {
@@ -80,27 +75,8 @@
 <style scoped lang="less">
   @import '~styles/vars.less';
 
-  .user {
-    color: @color-deep;
-    height: 1.92rem;
+  .user-header-container {
     padding: 0.32rem 0.4rem 0.26rem;
-    font-size: @font-size-large;
-    .avatar {
-      height: 1.33rem;
-      width: 1.33rem;
-      float: left;
-    }
-    .name {
-      float: left;
-      height: 1.33rem;
-      line-height: 1.33rem;
-      margin-left: 0.4rem;
-    }
-    .follow {
-      float: right;
-      height: 1.33rem;
-      line-height: 1.33rem;
-    }
   }
 
   .gallery-wrapper {

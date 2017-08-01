@@ -42,6 +42,9 @@
     }
 
     .center-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       margin-right: auto;
       color: @color-middle;
       font-size: @font-size-middle;
@@ -55,7 +58,7 @@
 
     .right-wrapper {
       color: @color-deep;
-      font-size: @font-size-middle;
+      font-size: @font-size-large;
       display: flex;
       align-items: center;
     }
