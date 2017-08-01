@@ -1,7 +1,7 @@
 <template>
   <div class="essay-desc-item">
     <template v-if="item.type === 'content'">
-    <user-header class="user-header-container" :user-info="item.userInfo"></user-header>
+      <user-header class="user-header-container" :user-info="item.userInfo"></user-header>
       <div class="content-wrapper" @click="handleOnContentClick">
         <div class="gallery-wrapper">
           <gallery :images="item.images"></gallery>

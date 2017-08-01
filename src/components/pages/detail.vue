@@ -6,7 +6,7 @@
         <user-header class="detail-item" :user-info="userInfo">2017.7.12 16:40</user-header>
         <div class="detail-item content-wrapper">
           <div class="xaudio-wrapper">
-            <x-audio></x-audio>
+            <x-audio v-if="essayDetail.voiceUrl" :src="essayDetail.voiceUrl"></x-audio>
           </div>
           <div class="essay-content">
             <div class="text-content">{{ essayDetail.content }}</div>
