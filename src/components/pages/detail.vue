@@ -49,9 +49,9 @@
           :data="pickerSlots"
           @change="handlePickerChange"
         ></smooth-picker> -->
-        <mt-picker
+        <!-- <mt-picker
           :slots="pickerSlots"
-        ></mt-picker>
+        ></mt-picker> -->
       </div>
     </div>
   </div>
@@ -105,7 +105,7 @@
     },
     methods: {
       handlePickerChange (ctx, value) {
-        console.log(ctx, value)
+        // console.log(ctx, value)
       }
     },
     components: {
