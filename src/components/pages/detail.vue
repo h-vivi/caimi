@@ -27,13 +27,31 @@
     </div>
     <div class="comments">
       <div class="comment-desc">最新评论 共{{comment.items.length}}条</div>
-      <div class="comment-items">
+      <div class="comment-items" :class="{ 'with-picker': showPicker }">
         <comment-item
           class="comment-item"
           v-for="(item, index) in comment.items"
           :key="index"
           :comment="item"
         ></comment-item>
+      </div>
+      <div class="btm-sender-wrapper">
+        <div class="inputer">
+          <input
+            type="text"
+            placeholder="请输入..."
+            @focus="showPicker = true"
+          >
+          <i class="xicon xicon-send"></i>
+        </div>
+        <!-- <smooth-picker
+          v-show="showPicker"
+          :data="pickerSlots"
+          @change="handlePickerChange"
+        ></smooth-picker> -->
+        <mt-picker
+          :slots="pickerSlots"
+        ></mt-picker>
       </div>
     </div>
   </div>
@@ -46,11 +64,19 @@
   import Gallery from '@/components/common/gallery'
   import CommentItem from '@/components/common/comment-item'
   import HeaderWithBack from '@/components/common/header-with-back'
+  import Picker from 'mint-ui'
 
   export default {
     name: 'detail',
     data () {
       return {
+        showPicker: false,
+        pickerSlots: [
+          {
+            list: [ '1', '2' ],
+            values: [ '1', '2', '3', '4', '5' ]
+          }
+        ],
         userInfo: {
           userId: 0,
           avatar: '',
@@ -78,8 +104,8 @@
       }
     },
     methods: {
-      back () {
-        this.$router.back()
+      handlePickerChange (ctx, value) {
+        console.log(ctx, value)
       }
     },
     components: {
@@ -87,7 +113,8 @@
       XAudio,
       Gallery,
       CommentItem,
-      HeaderWithBack
+      HeaderWithBack,
+      Picker
     },
     beforeMount () {
       getEssayDetail({ contentId: this.$route.params.id })
@@ -167,6 +194,8 @@
   }
 
   .comments {
+    padding-bottom: 1.33rem;
+
     .comment-desc {
       height: 0.8rem;
       line-height: 0.8rem;
@@ -186,6 +215,39 @@
         &:last-child {
           margin-bottom: 0;
         }
+      }
+    }
+  }
+
+  .btm-sender-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+
+    .inputer {
+      position: relative;
+      width: 100%;
+      height: 1.33rem;
+      padding: 0.2rem 0.26rem;
+      background-color: #000;
+
+      input {
+        width: 100%;
+        height: 100%;
+        border-radius: 0.10rem;
+        border: none;
+        padding: 0 calc(0.10rem + 0.26rem + 0.64rem) 0 0.10rem;
+      }
+
+      .xicon-send {
+        position: absolute;
+        right: 0.53rem;
+        // top: 0.36rem;
+        // 下面这样更精准一点
+        top: 0;
+        height: 100%;
       }
     }
   }

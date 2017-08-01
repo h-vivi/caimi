@@ -4590,6 +4590,11 @@
       "from": "vue-router@>=2.6.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/vue-router/-/vue-router-2.7.0.tgz"
     },
+    "vue-smooth-picker": {
+      "version": "0.2.5",
+      "from": "vue-smooth-picker@latest",
+      "resolved": "https://registry.npm.taobao.org/vue-smooth-picker/download/vue-smooth-picker-0.2.5.tgz"
+    },
     "vue-style-loader": {
       "version": "3.0.1",
       "from": "vue-style-loader@>=3.0.1 <4.0.0",

@@ -9,6 +9,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import promiseFinally from 'promise.prototype.finally'
+import SmoothPicker from 'vue-smooth-picker'
 
 // import './styles/roboto-italic.less'
 // import './styles/vue-material-icon.less'
@@ -18,6 +19,7 @@ import './styles/basic.less'
 promiseFinally.shim()
 sync(store, router)
 Vue.use(MintUI)
+Vue.use(SmoothPicker)
 Vue.config.productionTip = false
 
 window.$router = router

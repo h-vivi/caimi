@@ -21,6 +21,7 @@
     "qs": "^6.5.0",
     "vue": "^2.3.3",
     "vue-router": "^2.6.0",
+    "vue-smooth-picker": "^0.2.5",
     "vuex": "^2.3.1",
     "vuex-router-sync": "^4.2.0"
   },
