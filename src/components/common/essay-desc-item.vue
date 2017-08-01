@@ -4,7 +4,7 @@
       <div class="user">
         <img class="avatar" :src="item.userInfo.avatar">
         <div class="name">{{ item.userInfo.nickName }}</div>
-        <div class="follow">
+        <div class="follow" @click="followUser(item)">
           <template v-if="item.userInfo.follow">已关注</template>
           <template v-else>+&nbsp;关注</template>
         </div>
@@ -40,6 +40,7 @@
 
 <script>
   import Gallery from '@/components/common/gallery'
+  import { submitFollowUser } from '@/api'
 
   export default {
     name: 'essay-desc-item',
@@ -59,6 +60,17 @@
     methods: {
       handleOnContentClick () {
         this.$emit('item-content-click', this.item)
+      },
+      followUser (item) {
+        submitFollowUser({
+          followUserId: item.userInfo.userId
+        })
+          .then(res => {
+            if (!res.success) {
+              throw new Error('fail')
+            }
+            item.userInfo.follow = true
+          })
       }
     }
   }

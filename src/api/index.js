@@ -63,3 +63,9 @@ export const getEssayDetail = function ({ contentId }) {
     contentId
   })
 }
+
+export const submitFollowUser = function ({ followUserId }) {
+  return jsonpWrapper('relation/followUser', {
+    followUserId
+  })
+}

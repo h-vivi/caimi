@@ -9,7 +9,7 @@
       <div class="progress-bar-audio">
       </div>
     </div>
-    <audio></audio>
+    <audio src=""></audio>
   </div>
 </template>
 
