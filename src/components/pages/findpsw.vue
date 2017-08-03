@@ -1,12 +1,18 @@
 <template>
   <div class="findpsw">
+    <header-with-back>找回密码</header-with-back>
     findpsw
   </div>
 </template>
 
 <script>
+  import HeaderWithBack from '@/components/common/header-with-back'
+
   export default {
-    name: 'findpsw'
+    name: 'findpsw',
+    components: {
+      HeaderWithBack
+    }
   }
 </script>
 

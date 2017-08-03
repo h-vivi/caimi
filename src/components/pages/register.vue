@@ -1,12 +1,18 @@
 <template>
   <div class="register">
+    <header-with-back>注册</header-with-back>
     register
   </div>
 </template>
 
 <script>
+  import HeaderWithBack from '@/components/common/header-with-back'
+
   export default {
-    name: 'register'
+    name: 'register',
+    components: {
+      HeaderWithBack
+    }
   }
 </script>
 

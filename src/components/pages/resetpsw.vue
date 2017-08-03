@@ -1,5 +1,6 @@
 <template>
   <div class="psw">
+    <header-with-back>重置密码</header-with-back>
     重置密码页面
 
     <input type="" name="">
@@ -7,12 +8,12 @@
 </template>
 
 <script>
+  import HeaderWithBack from '@/components/common/header-with-back'
+
   export default {
     name: 'psw',
-    data () {
-      return {
-        msg: ''
-      }
+    components: {
+      HeaderWithBack
     }
   }
 </script>
