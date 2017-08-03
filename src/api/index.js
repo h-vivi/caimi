@@ -69,3 +69,9 @@ export const submitFollowUser = function ({ followUserId }) {
     followUserId
   })
 }
+
+export const addLikeArticle = function ({ contentId }) {
+  return jsonpWrapper('relation/likeContent', {
+    contentId
+  })
+}

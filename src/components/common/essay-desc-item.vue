@@ -11,7 +11,7 @@
       </div>
       <div class="opr">
         <div class="up">
-          <i class="xicon xicon-up" :class="{ 'xicon-up--liked': item.like }"></i>
+          <i class="xicon xicon-up" :class="{ 'xicon-up--liked': item.like }" @click="addLike"></i>
           {{ item.likeNum }}
         </div>
         <div class="comment">
@@ -33,8 +33,8 @@
 
 <script>
   import Gallery from '@/components/common/gallery'
-  import { submitFollowUser } from '@/api'
   import UserHeader from '@/components/common/user-header'
+  import { addLikeArticle } from '@/api'
 
   export default {
     name: 'essay-desc-item',
@@ -56,15 +56,16 @@
       handleOnContentClick () {
         this.$emit('item-content-click', this.item)
       },
-      followUser (item) {
-        submitFollowUser({
-          followUserId: item.userInfo.userId
-        })
+      addLike () {
+        if (this.item.like === true) {
+          return
+        }
+        addLikeArticle({ contentId: this.item.contentId })
           .then(res => {
             if (!res.success) {
-              throw new Error('fail')
+              return
             }
-            item.userInfo.follow = true
+            this.item.likeNum ++
           })
       }
     }

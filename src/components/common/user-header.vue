@@ -5,7 +5,7 @@
       <div class="name">{{ userInfo.nickName }}</div>
       <slot></slot>
     </div>
-    <div class="right-wrapper">
+    <div class="right-wrapper" @click="toggleFollowStatus">
       <template v-if="userInfo.follow">已关注</template>
       <template v-else>+&nbsp;关注</template>
     </div>
@@ -14,9 +14,26 @@
 
 <script>
   import Avatar from './avatar'
+  import { submitFollowUser } from '@/api'
 
   export default {
     name: 'user-header',
+    methods: {
+      toggleFollowStatus () {
+        if (this.userInfo.follow === true) {
+          return
+        }
+        submitFollowUser({
+          followUserId: this.userInfo.userId
+        })
+        .then(res => {
+          if (!res.success) {
+            throw new Error('fail')
+          }
+          this.userInfo.follow = true
+        })
+      }
+    },
     props: {
       userInfo: {
         type: Object,
