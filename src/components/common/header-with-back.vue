@@ -36,7 +36,6 @@
         window.history.go(-1)
       },
       opr () {
-        console.log('x')
         this.$emit('opr')
       }
     }
