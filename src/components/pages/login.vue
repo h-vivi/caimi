@@ -2,7 +2,7 @@
   <div class="login">
     <div class="top">
       <div class="back xicon xicon-back" @click="back"></div>
-      <router-link class="new-account" :to="{ name: 'psw' }">注册</router-link>
+      <router-link class="new-account" :to="{ name: 'register' }">注册</router-link>
     </div>
     <div class="content" :class="{ 'verify-mode': inVerifyMode }">
       <form class="info-form">
@@ -26,7 +26,7 @@
       <div class="extras">
         <div class="account" @click="toggleExtraLoginMtd">{{ loginInExtra.name }}</div>
         <!-- <router-link class="account" :to="{ query: loginInExtra.query }">{{ loginInExtra.name }}</router-link> -->
-        <router-link class="forget" :to="{ name: 'login' }">忘记密码</router-link>
+        <router-link class="forget" :to="{ name: 'findpsw' }">忘记密码</router-link>
       </div>
     </div>
   </div>

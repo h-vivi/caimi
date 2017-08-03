@@ -75,3 +75,18 @@ export const addLikeArticle = function ({ contentId }) {
     contentId
   })
 }
+
+export const sendStory = function ({ title, detail, voiceUrl, imageUrls }) {
+  if (!voiceUrl) {
+    voiceUrl = ''
+  }
+  if (!imageUrls) {
+    imageUrls = ''
+  }
+  return jsonpWrapper(`content/addContent`, {
+    title,
+    contentTxt: detail,
+    voiceUrl,
+    imageUrls
+  })
+}

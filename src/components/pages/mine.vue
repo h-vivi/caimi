@@ -8,7 +8,12 @@
       <router-link class="mine-sign" :to="{ name: 'login' }">登录彩米</router-link>
     </div>
     <ul class="mine-setting-module" >
-      <setting-item v-for="(setting, index) in settings1" :item="setting" :key="index"></setting-item>
+      <setting-item
+        v-for="(setting, index) in settings1"
+        :item="setting"
+        :key="index"
+        @click.native="handleClick(setting)"
+      ></setting-item>
     </ul>
     <ul class="mine-setting-module" >
       <setting-item
@@ -17,7 +22,6 @@
         :key="index"
       ></setting-item>
     </ul>
-
   </div>
 </template>
 
@@ -31,7 +35,10 @@
         settings1: [
           {
             name: '我的故事',
-            icon: 'story'
+            icon: 'story',
+            route: {
+              name: 'story'
+            }
           },
           {
             name: '我的收藏',
@@ -56,6 +63,13 @@
     },
     components: {
       SettingItem
+    },
+    methods: {
+      handleClick (item) {
+        if (item.route) {
+          this.$router.push(item.route)
+        }
+      }
     }
   }
 </script>

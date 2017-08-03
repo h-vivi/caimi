@@ -1,23 +1,17 @@
 <template>
-  <div class="psw">
-    找回密码页面
-
-    <input type="" name="">
+  <div class="findpsw">
+    findpsw
   </div>
 </template>
 
 <script>
   export default {
-    name: 'psw',
-    data () {
-      return {
-        msg: ''
-      }
-    }
+    name: 'findpsw'
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-
+  @import '~styles/vars.less';
+  
 </style>
