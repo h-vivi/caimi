@@ -143,25 +143,18 @@
     height: 100%;
 
     .header {
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
       height: 1.17rem;
       line-height: 1.17rem;
-      z-index: 2;
     }
     .essays {
       position: relative;
       height: 100%;
-      padding-top: 1.17rem;
       overflow-x: hidden;
       overflow-y: auto;
-      z-index: 1;
       background: @color-light;
+      height: e('calc(100% - 1.17rem)');
 
       .essay-desc-item {
-        margin-bottom: 0.266rem;
         background-color: #fff;
 
         &:last-child {

@@ -52,7 +52,6 @@
   }
 
   .content {
-    padding: 1.17rem 0 0 0;
     color: @color-deep;
     font-size: @font-size-larger;
   }

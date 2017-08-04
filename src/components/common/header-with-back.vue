@@ -47,11 +47,7 @@
   @import '~styles/vars.less';
 
   .wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2;
+    position: relative;
     display: flex;
     justify-content: space-between;
     height: 1.17rem;
@@ -73,6 +69,7 @@
       position: absolute;
       left: 50%;
       top: 0;
+      bottom: 0;
       transform: translate3d(-50%, 0, 0);
     }
 

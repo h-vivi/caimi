@@ -27,19 +27,11 @@
     overflow: hidden;
 
     .content {
-      position: relative;
-      height: 100%;
-      padding-bottom: 1.33rem;
+      height: e('calc(100% - 1.33rem)');
       overflow: hidden;
-      z-index: 1;
     }
     .footer {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
       height: 1.33rem;
-      z-index: 2;
     }
   }
 </style>
