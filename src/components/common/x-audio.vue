@@ -16,6 +16,7 @@
     </div>
     <audio
       :src="src"
+      :autoplay="autoplay"
       @loadedmetadata="handleLoadedMetaData"
       @play="toPlayingState"
       @pause="toPausingState"
@@ -126,7 +127,7 @@
 
     .progress-bar-wrapper {
       float: left;
-      width: 8.3rem;
+      width: e('calc(100% - 0.9rem)');
       height: 0.66rem;
       .audio-time {
         height: 0.53rem;

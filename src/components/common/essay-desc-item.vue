@@ -34,7 +34,7 @@
 <script>
   import Gallery from '@/components/common/gallery'
   import UserHeader from '@/components/common/user-header'
-  import { addLikeArticle } from '@/api'
+  import { likeArticle } from '@/api'
 
   export default {
     name: 'essay-desc-item',
@@ -60,7 +60,7 @@
         if (this.item.like === true) {
           return
         }
-        addLikeArticle({ contentId: this.item.contentId })
+        likeArticle({ contentId: this.item.contentId })
           .then(res => {
             if (!res.success) {
               return
@@ -126,9 +126,8 @@
   .desc {
     color: @color-deep;
     font-size: @font-size-middle;
-    width: 9.2rem;
     padding: 0.66rem 0;
-    margin: 0 auto;
+    margin: 0 0.4rem;
     line-height: 0.53rem;
     border-bottom: 1px solid @color-light;
   }

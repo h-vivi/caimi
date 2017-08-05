@@ -4,12 +4,13 @@ import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 import 'normalize.css'
 import MintUI from 'mint-ui'
+import promiseFinally from 'promise.prototype.finally'
+import SmoothPicker from 'vue-smooth-picker'
+import FastClick from 'fastclick'
 
 import App from './App'
 import router from './router'
 import store from './store'
-import promiseFinally from 'promise.prototype.finally'
-import SmoothPicker from 'vue-smooth-picker'
 
 // import './styles/roboto-italic.less'
 // import './styles/vue-material-icon.less'
@@ -21,6 +22,7 @@ sync(store, router)
 Vue.use(MintUI)
 Vue.use(SmoothPicker)
 Vue.config.productionTip = false
+FastClick.attach(document.body)
 
 window.$router = router
 

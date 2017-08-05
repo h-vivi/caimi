@@ -70,9 +70,21 @@ export const submitFollowUser = function ({ followUserId }) {
   })
 }
 
-export const addLikeArticle = function ({ contentId }) {
+export const likeArticle = function ({ contentId }) {
   return jsonpWrapper('relation/likeContent', {
     contentId
+  })
+}
+
+export const collectArticle = function ({ contentId }) {
+  return jsonpWrapper('relation/collectContent', {
+    contentId
+  })
+}
+
+export const likeComment = function ({ commentId }) {
+  return jsonpWrapper('relation/likeComment', {
+    comentId: commentId
   })
 }
 

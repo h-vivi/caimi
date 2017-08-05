@@ -17,7 +17,7 @@
         </div>
         <div class="opr">
           <div class="up">
-            <i class="xicon xicon-up"></i>
+            <i class="xicon xicon-up" @click="like"></i>
             <span></span>
           </div>
           <div class="comment">
@@ -33,6 +33,7 @@
 
 <script>
   import Avatar from './avatar'
+  import { likeComment } from '@/api'
 
   export default {
     name: 'comment',
@@ -43,6 +44,17 @@
       comment: {
         type: Object,
         required: true
+      }
+    },
+    methods: {
+      like () {
+        likeComment({ commentId: this.comment.commentId })
+          .then(res => {
+            if (!res.success) {
+              return
+            }
+          })
+        .catch(ex => { /* Ignore */ })
       }
     },
     components: {

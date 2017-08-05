@@ -20,5 +20,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: @font-size-middle;
+    // background-color: #fff;
   }
 </style>

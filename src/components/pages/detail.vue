@@ -1,70 +1,72 @@
 <template>
   <div class="detail optimize-scroll">
     <header-with-back>详情</header-with-back>
-    <div class="dummy-detail-wrapper">
-      <div class="detail-wrapper">
-        <user-header class="detail-item" :user-info="userInfo">2017.7.12 16:40</user-header>
-        <div class="detail-item content-wrapper">
-          <div class="xaudio-wrapper">
-            <x-audio v-if="essayDetail.voiceUrl" :src="essayDetail.voiceUrl"></x-audio>
+    <div class="container">
+      <div class="dummy-detail-wrapper">
+        <div class="detail-wrapper">
+          <user-header class="detail-item" :user-info="userInfo">2017.7.12 16:40</user-header>
+          <div class="detail-item content-wrapper">
+            <div class="xaudio-wrapper">
+              <x-audio v-if="essayDetail.voiceUrl" :src="essayDetail.voiceUrl"></x-audio>
+            </div>
+            <div class="essay-content">
+              <div class="text-content">{{ essayDetail.content }}</div>
+              <gallery :images="essayDetail.images"></gallery>
+            </div>
           </div>
-          <div class="essay-content">
-            <div class="text-content">{{ essayDetail.content }}</div>
-            <gallery :images="essayDetail.images"></gallery>
-          </div>
-        </div>
-        <div class="detail-item essay-opr">
-          <div class="opr-item">
-            <i class="xicon xicon-up--b"></i>
-            <span>{{ essayDetail.likeNum }}</span>
-          </div>
-          <div class="opr-item">
-            <i class="xicon xicon-collect--b"></i>
-            <span>{{ essayDetail.collectNum }}</span>
+          <div class="detail-item essay-opr">
+            <div class="opr-item">
+              <i class="xicon xicon-up--b" @click="like"></i>
+              <span>{{ essayDetail.likeNum }}</span>
+            </div>
+            <div class="opr-item">
+              <i class="xicon xicon-collect--b" @click="collect"></i>
+              <span>{{ essayDetail.collectNum }}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="comments">
-      <div class="comment-desc">最新评论 共{{comment.items.length}}条</div>
-      <div class="comment-items" :class="{ 'with-picker': showPicker }">
-        <comment-item
-          class="comment-item"
-          v-for="(item, index) in comment.items"
-          :key="index"
-          :comment="item"
-        ></comment-item>
-      </div>
-      <div class="btm-sender-wrapper">
-        <div class="inputer">
-          <input
-            type="text"
-            placeholder="请输入..."
-            @focus="showPicker = true"
-          >
-          <i class="xicon xicon-send"></i>
+      <div class="comments">
+        <div class="comment-desc">最新评论 共{{comment.items.length}}条</div>
+        <div class="comment-items" :class="{ 'with-picker': showPicker }">
+          <comment-item
+            class="comment-item"
+            v-for="(item, index) in comment.items"
+            :key="index"
+            :comment="item"
+          ></comment-item>
         </div>
-        <!-- <smooth-picker
-          v-show="showPicker"
-          :data="pickerSlots"
-          @change="handlePickerChange"
-        ></smooth-picker> -->
-        <!-- <mt-picker
-          :slots="pickerSlots"
-        ></mt-picker> -->
+        <div class="btm-sender-wrapper">
+          <div class="inputer">
+            <input
+              type="text"
+              placeholder="请输入..."
+              @focus="showPicker = true"
+            >
+            <i class="xicon xicon-send"></i>
+          </div>
+          <!-- <smooth-picker
+            v-show="showPicker"
+            :data="pickerSlots"
+            @change="handlePickerChange"
+          ></smooth-picker> -->
+          <!-- <mt-picker
+            :slots="pickerSlots"
+          ></mt-picker> -->
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import { getEssayDetail } from '@/api'
   import UserHeader from '@/components/common/user-header'
   import XAudio from '@/components/common/x-audio'
   import Gallery from '@/components/common/gallery'
   import CommentItem from '@/components/common/comment-item'
   import HeaderWithBack from '@/components/common/header-with-back'
   import Picker from 'mint-ui'
+  import { getEssayDetail, likeArticle, collectArticle } from '@/api'
 
   export default {
     name: 'detail',
@@ -104,6 +106,27 @@
       }
     },
     methods: {
+      like () {
+        likeArticle({ contentId: this.essayDetail.contentId })
+          .then(res => {
+            if (!res.success) {
+              return
+            }
+            this.essayDetail.likeNum ++
+          })
+      },
+      collect () {
+        if (this.essayDetail.collect) {
+          return
+        }
+        collectArticle({ contentId: this.essayDetail.contentId })
+          .then(res => {
+            if (!res.success) {
+              return
+            }
+            this.essayDetail.collect = true
+          })
+      },
       handlePickerChange (ctx, value) {
         // console.log(ctx, value)
       }
@@ -141,17 +164,19 @@
 
   .detail {
     height: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
+  }
+
+  .container {
+    height: e('calc(100% - 1.17rem)');
     overflow-y: auto;
   }
 
   .dummy-detail-wrapper {
     background-color: #e0e0e0;
-    overflow: hidden;
   }
 
   .detail-wrapper {
-    padding-top: 1.17rem;
     padding-bottom: 0.53rem;
     margin-bottom: 0.26rem;
     background-color: #fff;
@@ -238,6 +263,7 @@
         height: 100%;
         border-radius: 0.10rem;
         border: none;
+        outline: none;
         padding: 0 calc(0.10rem + 0.26rem + 0.64rem) 0 0.10rem;
       }
 

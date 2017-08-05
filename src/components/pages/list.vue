@@ -156,6 +156,7 @@
 
       .essay-desc-item {
         background-color: #fff;
+        margin-bottom: 0.26rem;
 
         &:last-child {
           margin-bottom: 0;

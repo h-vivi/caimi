@@ -29,9 +29,11 @@
           detail: this.detail
         })
           .then(res => {
-            if (!res.sucess) {
+            if (!res.success) {
               return
             }
+            console.log('x')
+            this.$router.push({ name: 's::list' })
           })
           .catch(ex => { /* Ignore */ })
       }
