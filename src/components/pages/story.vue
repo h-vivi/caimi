@@ -6,6 +6,12 @@
         <input type="text" class="title" placeholder="添加标题" v-model="title">
         <textarea class="detail" placeholder="添加内容" v-model="detail"></textarea>
       </div>
+      <div class="extra-oprs">
+        <i class="xicon xicon-up opr-item"></i>
+        <i class="xicon xicon-up opr-item" @click="toggleRecord"></i>
+      </div>
+      <audio controls :src="src"></audio>
+      <a :href="src" :download="mp3Name">{{ mp3Name }}</a>
     </div>
   </div>
 </template>
@@ -13,16 +19,37 @@
 <script>
   import HeaderWithBack from '@/components/common/header-with-back'
   import { sendStory } from '@/api'
+  import XRecorder from '@/utils/xrecorder'
 
   export default {
     name: 'story',
     data () {
       return {
         title: '',
-        detail: ''
+        detail: '',
+        recording: false,
+        src: '',
+        mp3Name: '',
+        recorder: new XRecorder({
+          bitRate: 64,
+          onComplete: function (data) {
+            const blob = new Blob(data, { type: 'audio/mp3' })
+            this.src = URL.createObjectURL(blob)
+            this.mp3Name = 'recording_' + Date.now() + '.mp3'
+            console.log('completed', ...arguments)
+          }.bind(this)
+        })
       }
     },
     methods: {
+      toggleRecord () {
+        if (this.recording) {
+          this.recorder.stop()
+        } else {
+          this.recorder.start()
+        }
+        this.recording = !this.recording
+      },
       sendMyStory () {
         sendStory({
           title: this.title,
@@ -32,7 +59,6 @@
             if (!res.success) {
               return
             }
-            console.log('x')
             this.$router.push({ name: 's::list' })
           })
           .catch(ex => { /* Ignore */ })
@@ -76,6 +102,17 @@
       height: 5.5rem;
       padding-top: 0.5rem;
       resize: none;
+    }
+  }
+
+  .extra-oprs {
+    display: flex;
+    align-items: center;
+    height: 1.26rem;
+    padding: 0 0.4rem;
+
+    .opr-item {
+      margin-right: 0.66rem;
     }
   }
 

@@ -24,8 +24,6 @@ Vue.use(SmoothPicker)
 Vue.config.productionTip = false
 FastClick.attach(document.body)
 
-window.$router = router
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
