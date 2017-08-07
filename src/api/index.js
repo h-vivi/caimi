@@ -102,3 +102,21 @@ export const sendStory = function ({ title, detail, voiceUrl, imageUrls }) {
     imageUrls
   })
 }
+
+export const uploadVoice = function ({ blob }) {
+  return axios.post(`upload/uploadVoice`, {
+    file: blob
+  })
+}
+
+export const commentArticle = function ({
+  beCommentUserId,
+  contentId,
+  commentContent
+}) {
+  return jsonpWrapper('comment/addComment', {
+    beCommentUserId,
+    contentId,
+    commentContent
+  })
+}

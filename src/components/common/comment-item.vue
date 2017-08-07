@@ -21,7 +21,7 @@
             <span></span>
           </div>
           <div class="comment">
-            <i class="xicon xicon-comment"></i>
+            <i class="xicon xicon-comment" @click="reply"></i>
             <span></span>
           </div>
         </div>
@@ -55,6 +55,9 @@
             }
           })
         .catch(ex => { /* Ignore */ })
+      },
+      reply () {
+        this.$emit('reply-this-comment', { comment: this.comment })
       }
     },
     components: {

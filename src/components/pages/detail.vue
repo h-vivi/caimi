@@ -34,16 +34,19 @@
             v-for="(item, index) in comment.items"
             :key="index"
             :comment="item"
+            @reply-this-comment="toReply"
           ></comment-item>
         </div>
         <div class="btm-sender-wrapper">
           <div class="inputer">
             <input
               type="text"
-              placeholder="请输入..."
+              class="reply-input"
+              :placeholder="placeholder"
               @focus="showPicker = true"
+              v-model="commentContent"
             >
-            <i class="xicon xicon-send"></i>
+            <i class="xicon xicon-send" @click="send"></i>
           </div>
           <!-- <smooth-picker
             v-show="showPicker"
@@ -66,7 +69,12 @@
   import CommentItem from '@/components/common/comment-item'
   import HeaderWithBack from '@/components/common/header-with-back'
   import Picker from 'mint-ui'
-  import { getEssayDetail, likeArticle, collectArticle } from '@/api'
+  import {
+    getEssayDetail,
+    likeArticle,
+    collectArticle,
+    commentArticle
+  } from '@/api'
 
   export default {
     name: 'detail',
@@ -102,7 +110,9 @@
           contentId: 0,
           items: [ ]
         },
-        recommendWords: [ ]
+        recommendWords: [ ],
+        toReplyComment: null,
+        commentContent: ''
       }
     },
     methods: {
@@ -129,6 +139,44 @@
       },
       handlePickerChange (ctx, value) {
         // console.log(ctx, value)
+      },
+      toReply ({ comment }) {
+        this.toReplyComment = comment
+        this.$el.querySelector('.reply-input').focus()
+        this.commentContent = ''
+      },
+      send () {
+        let beCommentUserId = ''
+        if (this.toReplyComment) {
+          beCommentUserId = this.toReplyComment.commentUserInfo.userId
+        }
+        commentArticle({
+          beCommentUserId,
+          commentContent: this.commentContent,
+          contentId: this.essayDetail.contentId
+        })
+          .then(res => {
+            if (!res.success) {
+              return
+            }
+            this.commentContent = ''
+            return this.loadDetail()
+          })
+          .catch(ex => { /* Ignore */ })
+      },
+      loadDetail () {
+        getEssayDetail({ contentId: this.$route.params.id })
+          .then(res => {
+            if (!res.success) {
+              return
+            }
+            const data = res.data
+            this.userInfo = data.userInfo
+            this.comment = data.comment
+            this.essayDetail = data.contentDetail
+            this.recommendWords = data.recommendWords
+          })
+          .catch(ex => { /* Ignore */ })
       }
     },
     components: {
@@ -139,19 +187,15 @@
       HeaderWithBack,
       Picker
     },
+    computed: {
+      placeholder () {
+        return !this.toReplyComment
+          ? '请输入...'
+          : `回复${this.toReplyComment.commentUserInfo.nickName}...`
+      }
+    },
     beforeMount () {
-      getEssayDetail({ contentId: this.$route.params.id })
-        .then(res => {
-          if (!res.success) {
-            return
-          }
-          const data = res.data
-          this.userInfo = data.userInfo
-          this.comment = data.comment
-          this.essayDetail = data.contentDetail
-          this.recommendWords = data.recommendWords
-        })
-        .catch(ex => { /* Ignore */ })
+      this.loadDetail()
     }
   }
 </script>
