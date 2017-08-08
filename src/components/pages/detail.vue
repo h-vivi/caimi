@@ -4,7 +4,7 @@
     <div class="container">
       <div class="dummy-detail-wrapper">
         <div class="detail-wrapper">
-          <user-header class="detail-item" :user-info="userInfo">2017.7.12 16:40</user-header>
+          <user-header class="detail-item" :user-info="userInfo"></user-header>
           <div class="detail-item content-wrapper">
             <div class="xaudio-wrapper">
               <x-audio v-if="essayDetail.voiceUrl" :src="essayDetail.voiceUrl"></x-audio>

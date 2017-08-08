@@ -13,7 +13,7 @@
               <span class="to">{{ comment.beCommentUserName }}</span>
             </template>
           </div>
-          <div class="time">2017.7.16 16:00</div>
+          <div class="time"></div>
         </div>
         <div class="opr">
           <div class="up">

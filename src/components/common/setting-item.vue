@@ -1,6 +1,6 @@
 <template lang="html">
   <li class="setting-item">
-    <span alt="" :class="'xicon xicon-setting ' + item.icon"></span>
+    <i alt="" :class="'xicon xicon-setting ' + item.icon"></i>
     <div class="setting-name">{{ item.name }}</div>
   </li>
 </template>
@@ -26,6 +26,7 @@ export default {
 <style scoped lang="less">
   @import '~styles/vars.less';
     .setting-item {
+      display: flex;
       height: 1.6rem;
       &:last-child {
         .setting-name {
@@ -36,7 +37,6 @@ export default {
     .xicon-setting {
       width: 0.53rem;
       height: 1.6rem;
-      float: left;
       background-repeat: no-repeat;
       background-position: 0 center;
       margin-right: 0.1rem;
@@ -57,11 +57,11 @@ export default {
       background-image: url(../../assets/xicon-set.png);
     }
     .setting-name {
-      float: left;
-      width: 8.53rem;
       color: @color-deep;
+      flex: 1;
       height: 1.6rem;
-      line-height: 1.65rem;
+      line-height: 1.6rem;
+      padding-left: 0.4rem;
       font-size: @font-size-larger;
       border-bottom: 1px solid @color-light;
       background: url(../../assets/go.png) right center no-repeat;

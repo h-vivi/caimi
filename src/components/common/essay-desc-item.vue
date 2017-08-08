@@ -18,9 +18,7 @@
           <i class="xicon xicon-comment"></i>
           {{ item.commentNum }}
         </div>
-        <div class="time">
-          2017.7.12 16:40
-        </div>
+        <div class="time"></div>
       </div>
     </template>
     <template v-if="item.type === 'banner'">

@@ -2,7 +2,8 @@
   <div class="login">
     <div class="top">
       <div class="back xicon xicon-back" @click="back"></div>
-      <router-link class="new-account" :to="{ name: 'register' }">注册</router-link>
+      <!-- <router-link class="new-account" :to="{ name: 'register' }">注册</router-link> -->
+      <div class="new-account" v-if="!inVerifyMode" @click="register">注册</div>
     </div>
     <div class="content" :class="{ 'verify-mode': inVerifyMode }">
       <form class="info-form">
@@ -96,6 +97,9 @@
           })
         .catch(ex => { /* Ignore */ })
       },
+      register () {
+        this.inVerifyMode = true
+      },
       gc () {
         clearInterval(this.verifyTimer)
         this.curTime = 0
@@ -106,10 +110,6 @@
       next()
     },
     computed: {
-      // inVerifyMode () {
-        // return this.$route.query.verify === true ||
-          // this.$route.query.verify === 'true'
-      // },
       loginInExtra () {
         if (!this.inVerifyMode) {
           return {
