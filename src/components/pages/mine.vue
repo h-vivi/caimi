@@ -20,6 +20,7 @@
         v-for="(setting, index) in settings2"
         :item="setting"
         :key="index"
+        @click.native="handleClick(setting)"
       ></setting-item>
     </ul>
   </div>
@@ -56,7 +57,10 @@
         settings2: [
           {
             name: '设置',
-            icon: 'set'
+            icon: 'set',
+            route: {
+              name: 'settings'
+            }
           }
         ]
       }
