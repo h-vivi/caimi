@@ -109,6 +109,6 @@
   .mine-setting-module {
     margin-top: 0.26rem;
     background: #fff;
-    padding: 0 0.2rem 0 0.4rem;
+    padding: 0 0.4rem 0 0.4rem;
   }
 </style>

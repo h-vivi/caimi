@@ -3,7 +3,7 @@
     <div class="top">
       <div class="back xicon xicon-back" @click="back"></div>
       <!-- <router-link class="new-account" :to="{ name: 'register' }">注册</router-link> -->
-      <div class="new-account" v-if="!inVerifyMode" @click="register">注册</div>
+      <div class="new-account" v-if="false && !inVerifyMode" @click="register">注册</div>
     </div>
     <div class="content" :class="{ 'verify-mode': inVerifyMode }">
       <form class="info-form">
@@ -24,7 +24,7 @@
 
         <input type="button" class="xbtn xbtn-large login-btn" value="登录" @click="loginAction">
       </form>
-      <div class="extras">
+      <div v-if="false" class="extras">
         <div class="account" @click="toggleExtraLoginMtd">{{ loginInExtra.name }}</div>
         <!-- <router-link class="account" :to="{ query: loginInExtra.query }">{{ loginInExtra.name }}</router-link> -->
         <router-link class="forget" :to="{ name: 'findpsw' }">忘记密码</router-link>
@@ -44,7 +44,7 @@
         psw: '',
         curTime: 0,
         disableGetVerify: false,
-        inVerifyMode: false
+        inVerifyMode: true // false
       }
     },
     methods: {

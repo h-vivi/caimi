@@ -69,7 +69,7 @@ proto.init = function () {
 
   const audio = this.audio = new AudioContext()
 
-  const Worker = require(`worker-loader!./worker.js`)
+  const Worker = require(`worker-loader?inline!./worker.js`)
   const worker = this.worker = new Worker()
   worker.onmessage = evt => {
     const { type, data } = evt.data

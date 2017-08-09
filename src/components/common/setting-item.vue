@@ -1,7 +1,11 @@
 <template lang="html">
   <li class="setting-item">
-    <i alt="" :class="'xicon xicon-setting ' + item.icon"></i>
-    <div class="setting-name">{{ item.name }}</div>
+    <i v-if="item.icon" alt="" :class="'xicon xicon-setting ' + item.icon"></i>
+    <div class="content">
+      <div>{{ item.name }}</div>
+      <div class="center"><slot></slot></div>
+      <i class="right"></i>
+    </div>
   </li>
 </template>
 
@@ -56,14 +60,27 @@ export default {
     .set {
       background-image: url(../../assets/xicon-set.png);
     }
-    .setting-name {
-      color: @color-deep;
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       flex: 1;
-      height: 1.6rem;
-      line-height: 1.6rem;
+      min-height: 1.6rem;
       padding-left: 0.4rem;
       font-size: @font-size-larger;
       border-bottom: 1px solid @color-light;
-      background: url(../../assets/go.png) right center no-repeat;
+      color: @color-deep;
+    }
+    .center {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 0.26rem;
+    }
+    .right {
+      display: inline-block;
+      width: 14px;
+      height: 30px;
+      background: url(../../assets/go.png) no-repeat;
     }
 </style>

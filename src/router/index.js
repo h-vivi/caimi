@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Login from '@/components/pages/login'
-import Register from '@/components/pages/register'
+// import Register from '@/components/pages/register'
 import Findpsw from '@/components/pages/findpsw'
 import Resetpsw from '@/components/pages/resetpsw'
 import S from '@/components/pages/s'
@@ -10,6 +10,7 @@ import List from '@/components/pages/list'
 import Mine from '@/components/pages/mine'
 import Detail from '@/components/pages/detail'
 import Story from '@/components/pages/story'
+import Settings from '@/components/pages/settings'
 // import Hello from '@/components/Hello'
 
 Vue.use(Router)
@@ -35,11 +36,11 @@ export default new Router({
       name: 'resetpsw',
       component: Resetpsw
     },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register
-    },
+    // {
+      // path: '/register',
+      // name: 'register',
+      // component: Register
+    // },
     {
       path: '/findpsw',
       name: 'findpsw',
@@ -72,6 +73,11 @@ export default new Router({
       path: '/story',
       name: 'story',
       component: Story
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings
     },
     {
       path: '*',
