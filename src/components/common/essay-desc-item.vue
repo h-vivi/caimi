@@ -64,6 +64,7 @@
               return
             }
             this.item.likeNum ++
+            this.item.like = true
           })
       }
     }

@@ -16,7 +16,7 @@
           </div>
           <div class="detail-item essay-opr">
             <div class="opr-item">
-              <i class="xicon xicon-up--b" @click="like"></i>
+              <i class="xicon xicon-up--b" :class="{ 'xicon-up-liked--b': essayDetail.like }" @click="like"></i>
               <span>{{ essayDetail.likeNum }}</span>
             </div>
             <div class="opr-item">
@@ -117,12 +117,16 @@
     },
     methods: {
       like () {
+        if (this.essayDetail.like === true) {
+          return
+        }
         likeArticle({ contentId: this.essayDetail.contentId })
           .then(res => {
             if (!res.success) {
               return
             }
             this.essayDetail.likeNum ++
+            this.essayDetail.like = true
           })
       },
       collect () {
