@@ -6,15 +6,22 @@
 import axios from 'axios'
 import jsonp from 'jsonp'
 import qs from 'qs'
+import router from '../router'
 
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://api.caimixinli.com/serverapi/'
+
+const UN_AUTH_CODE = Number('1102')
 
 const jsonpWrapper = function (url, data) {
   return new Promise((resolve, reject) => {
     jsonp(axios.defaults.baseURL + url, { param: qs.stringify(data) + '&callback' }, (err, data) => {
       if (err) {
         reject(err)
+      }
+      if (Number(data.code) === UN_AUTH_CODE) {
+        router.push({ name: 'login' })
+        return
       }
       resolve(data)
     })
