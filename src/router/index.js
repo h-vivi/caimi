@@ -81,7 +81,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: { name: 'login' }
+      redirect: { name: 's::list' }
     }
   ],
   scrollBehavior (to, from, savedPosition) {
