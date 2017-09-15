@@ -130,8 +130,8 @@ input[type=text]::-ms-clear {
 }
 
 .xicon-main {
-  width: 0.34rem; // 26px;
-  height: 0.53rem; // 40px;
+  width: 0.5rem; // 26px;
+  height: 1rem; // 40px;
   background-image: url(../assets/xicon-main.png);
 }
 
@@ -142,11 +142,21 @@ input[type=text]::-ms-clear {
 }
 
 .xicon-mine {
-  width: 0.4rem; // 30px;
-  height: 0.52rem; // 39px
+  width: 0.5rem; // 30px;
+  height: 1rem; // 39px
   background-image: url(../assets/xicon-mine.png);
 }
-
+.router-link-active {
+  .xicon-main {
+    background-image: url(../assets/xicon-main-active.png);
+  }
+  .xicon-add {
+    background-image: url(../assets/xicon-add-active.png);
+  }
+  .xicon-mine {
+    background-image: url(../assets/xicon-mine-active.png);
+  }
+}
 .xicon-back {
   width: 0.26rem;
   height: 0.53rem;

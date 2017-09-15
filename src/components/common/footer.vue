@@ -1,15 +1,15 @@
 <template>
   <footer class="footer">
-    <router-link class="footer-item main" :to="{ name: 's::list' }">
+    <router-link class="footer-item main" :class="{ 'main-selected': selectMain }" :to="{ name: 's::list' }">
       <i class="xicon xicon-main"></i>
-      <span class="name">首页</span>
+      <!--<span class="name">首页</span>-->
     </router-link>
-    <router-link class="footer-item mine" :to="{ name: 'story' }">
+    <router-link class="footer-item add" :class="{ 'add-selected': selectAdd }" :to="{ name: 'story' }">
       <i class="xicon xicon-add"></i>
     </router-link>
-    <router-link class="footer-item mine" :to="{ name: 's::mine' }">
+    <router-link class="footer-item mine" :class="{ 'mine-selected': selectMine }" :to="{ name: 's::mine' }">
       <i class="xicon xicon-mine"></i>
-      <span class="name">我的</span>
+      <!--<span class="name">我的</span>-->
     </router-link>
   </footer>
 </template>
@@ -19,6 +19,11 @@
     name: 'footer',
     data () {
       return { }
+    },
+    methods: {
+      changeChooseStatus () {
+        console.log(this)
+      }
     }
   }
 </script>
