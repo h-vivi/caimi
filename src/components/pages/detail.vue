@@ -6,11 +6,11 @@
         <div class="detail-wrapper">
           <user-header class="detail-item" :user-info="userInfo"></user-header>
           <div class="detail-item content-wrapper">
-            <div class="xaudio-wrapper">
+            <div class="xaudio-wrapper" v-if="essayDetail.voiceUrl">
               <x-audio v-if="essayDetail.voiceUrl" :src="essayDetail.voiceUrl"></x-audio>
             </div>
             <div class="essay-content">
-              <div class="text-content">{{ essayDetail.content }}</div>
+              <div class="text-content" v-html="essayDetail.content"></div>
               <gallery :images="essayDetail.images"></gallery>
             </div>
           </div>

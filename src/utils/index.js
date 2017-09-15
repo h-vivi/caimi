@@ -3,6 +3,12 @@
  * bq-hentai | 07/22/2017
  */
 
+import router from '@/router'
+
+export const toLogin = function () {
+  router.push({ name: 'login' })
+}
+
 export const setDefaultIf = function (fn, x, v, thisArg) {
   if (fn.call(thisArg, x)) {
     return x

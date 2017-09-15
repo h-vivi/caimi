@@ -6,12 +6,12 @@
         <input type="text" class="title" placeholder="添加标题" v-model="title">
         <textarea class="detail" placeholder="添加内容" v-model="detail"></textarea>
       </div>
-      <div class="extra-oprs">
+      <!-- <div class="extra-oprs">
         <i class="xicon xicon-up opr-item"></i>
         <i class="xicon xicon-up opr-item" @click="toggleRecord"></i>
       </div>
       <audio controls :src="src"></audio>
-      <a :href="src" :download="mp3Name">{{ mp3Name }}</a>
+      <a :href="src" :download="mp3Name">{{ mp3Name }}</a> -->
     </div>
   </div>
 </template>

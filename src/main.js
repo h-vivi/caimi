@@ -7,6 +7,7 @@ import MintUI from 'mint-ui'
 import promiseFinally from 'promise.prototype.finally'
 import SmoothPicker from 'vue-smooth-picker'
 import FastClick from 'fastclick'
+import VueCookie from 'vue-cookie'
 
 import App from './App'
 import router from './router'
@@ -21,6 +22,7 @@ promiseFinally.shim()
 sync(store, router)
 Vue.use(MintUI)
 Vue.use(SmoothPicker)
+Vue.use(VueCookie)
 Vue.config.productionTip = false
 FastClick.attach(document.body)
 

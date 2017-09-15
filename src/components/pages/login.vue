@@ -61,6 +61,10 @@
         if (this.disableGetVerify) {
           return
         }
+        if (!this.phone) {
+          this.$toast('请输入手机号')
+          return
+        }
         getVerifyCode({ phone: this.phone })
           .then(res => {
             if (!res.success) {
@@ -81,7 +85,12 @@
         .catch(ex => { /* Ignore */ })
       },
       loginAction () {
-        if (!this.phone || !this.psw) {
+        if (!this.phone) {
+          this.$toast('请输入手机号')
+          return
+        }
+        if (!this.psw) {
+          this.$toast(`请输入${this.inVerifyMode ? '验证码' : '密码'}`)
           return
         }
         let method = loginViaVerifyCode
@@ -91,6 +100,7 @@
         method({ phone: this.phone, verifyCode: this.psw })
           .then(res => {
             if (!res.success) {
+              this.$toast(res.msg)
               return
             }
             this.$router.push({ name: 's' })

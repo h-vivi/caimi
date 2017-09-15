@@ -101,6 +101,8 @@
     .opr {
       display: flex;
       .up {
+        /* 暂时去除 */
+        display: none;
         margin-right: 0.4rem;
         .xicon {
           margin-right: 0.13rem;
