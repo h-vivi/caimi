@@ -11,6 +11,7 @@ import Mine from '@/components/pages/mine'
 import Detail from '@/components/pages/detail'
 import Story from '@/components/pages/story'
 import Settings from '@/components/pages/settings'
+import StoryList from '@/components/pages/story-list'
 // import Hello from '@/components/Hello'
 
 Vue.use(Router)
@@ -78,6 +79,11 @@ export default new Router({
       path: '/settings',
       name: 'settings',
       component: Settings
+    },
+    {
+      path: '/story/list',
+      name: 'storyList',
+      component: StoryList
     },
     {
       path: '*',

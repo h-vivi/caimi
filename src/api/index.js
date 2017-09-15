@@ -41,6 +41,12 @@ export const loadEssayList = function ({ pageNo, code }) {
   })
 }
 
+export const loadStoryList = function ({ pageNo }) {
+  return jsonpWrapper('content/queryMyContent', {
+    pageNo
+  })
+}
+
 export const getVerifyCode = function ({ phone }) {
   // return axios.get(`userlogin/getPhoneCheckCode?phone=${phone}`)
   return jsonpWrapper('userlogin/getPhoneCheckCode', {
