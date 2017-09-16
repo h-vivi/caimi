@@ -6,6 +6,10 @@
         <input type="text" class="title" placeholder="添加标题" v-model="title">
         <textarea class="detail" placeholder="添加内容" v-model="detail"></textarea>
       </div>
+      <div class="up-xicon">
+        <span class="xicon up-img"></span>
+        <span class="xicon up-voice"></span>
+      </div>
       <!-- <div class="extra-oprs">
         <i class="xicon xicon-up opr-item"></i>
         <i class="xicon xicon-up opr-item" @click="toggleRecord"></i>
@@ -80,11 +84,13 @@
   }
 
   .content {
+    height: e('calc(100% - 1.17rem)');
     color: @color-deep;
     font-size: @font-size-larger;
   }
 
   .inputer {
+    height: e('calc(100% - 0.9rem)');
     padding: 0 0.4rem;
     border-bottom: 1px solid @color-light;
     .detail, .title {
@@ -115,5 +121,19 @@
       margin-right: 0.66rem;
     }
   }
-
+  .up-xicon {
+    padding-left: 0.4rem;
+    span {
+      width: 0.6rem;
+      height: 0.9rem;
+      float: left;
+    }
+    .up-img {
+      margin-right: 0.6rem;
+      background-image: url(../../assets/upImg.png);
+    }
+    .up-voice {
+      background-image: url(../../assets/upVoice.png);
+    }
+  }
 </style>
