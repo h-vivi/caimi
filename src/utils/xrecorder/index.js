@@ -5,6 +5,7 @@
  *  - [recorder.js](https://github.com/devin87/mp3-recorder)
  */
 
+let supportGetUserMedia = true
 const AudioContext = window.AudioContext || window.webkitAudioContext
 let getUserMedia = null
 let inMediaDeviceMode = false
@@ -22,15 +23,18 @@ if (
 }
 
 if (!getUserMedia) {
-  throw new Error('Platform not support')
+  supportGetUserMedia = false
+  // throw new Error('Platform not support')
 }
 
-// set context
-getUserMedia = getUserMedia.bind(
-  inMediaDeviceMode
-  ? navigator.MediaDevices
-  : navigator
-)
+if (supportGetUserMedia) {
+  // set context
+  getUserMedia = getUserMedia.bind(
+    inMediaDeviceMode
+    ? navigator.MediaDevices
+    : navigator
+  )
+}
 
 const noop = function () { }
 
@@ -57,6 +61,8 @@ const C = function (opts) {
 
   this.init()
 }
+
+C.isSupportGetUserMedia = _ => supportGetUserMedia
 
 const proto = C.prototype = {
   constructor: C

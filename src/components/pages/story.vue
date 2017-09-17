@@ -8,22 +8,24 @@
       </div>
       <div class="up-xicon">
         <span class="xicon up-img"></span>
-        <span class="xicon up-voice"></span>
+        <span v-if="supportMedia" class="xicon up-voice" @click="toggleRecord"></span>
       </div>
       <!-- <div class="extra-oprs">
         <i class="xicon xicon-up opr-item"></i>
         <i class="xicon xicon-up opr-item" @click="toggleRecord"></i>
-      </div>
-      <audio controls :src="src"></audio>
-      <a :href="src" :download="mp3Name">{{ mp3Name }}</a> -->
+      </div> -->
+      <!-- <audio controls :src="src"></audio> -->
+      <!-- <a :href="src" :download="mp3Name">{{ mp3Name }}</a> -->
     </div>
   </div>
 </template>
 
 <script>
   import HeaderWithBack from '@/components/common/header-with-back'
-  import { sendStory } from '@/api'
+  import { sendStory, uploadVoice } from '@/api'
   import XRecorder from '@/utils/xrecorder'
+
+  const supportMedia = XRecorder.isSupportGetUserMedia()
 
   export default {
     name: 'story',
@@ -34,12 +36,16 @@
         recording: false,
         src: '',
         mp3Name: '',
+        supportMedia,
         recorder: new XRecorder({
           bitRate: 64,
           onComplete: function (data) {
-            const blob = new Blob(data, { type: 'audio/mp3' })
-            this.src = URL.createObjectURL(blob)
+            const file = new File(data, 'recording_' + Date.now() + '.mp3', { type: 'audio/mp3' })
+            this.src = URL.createObjectURL(file)
             this.mp3Name = 'recording_' + Date.now() + '.mp3'
+            const fd = new FormData()
+            fd.append('file', file)
+            uploadVoice({ fd })
             console.log('completed', ...arguments)
           }.bind(this)
         })

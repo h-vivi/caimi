@@ -27,7 +27,7 @@ Vue.config.productionTip = false
 FastClick.attach(document.body)
 
 /* eslint-disable no-new */
-new Vue({
+export default new Vue({
   el: '#app',
   store,
   router,

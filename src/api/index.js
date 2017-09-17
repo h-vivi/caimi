@@ -169,10 +169,8 @@ export const sendStory = function ({ title, detail, voiceUrl, imageUrls }) {
   // })
 }
 
-export const uploadVoice = function ({ blob }) {
-  return axios.post(`upload/uploadVoice`, {
-    file: blob
-  })
+export const uploadVoice = function ({ fd }) {
+  return axios.post(`upload/uploadVoice`, fd)
 }
 
 export const commentArticle = function ({
