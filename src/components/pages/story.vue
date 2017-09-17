@@ -5,10 +5,10 @@
       <div class="inputer">
         <input type="text" class="title" placeholder="添加标题" v-model="title">
         <textarea class="detail" placeholder="添加内容" v-model="detail"></textarea>
-      </div>
-      <div class="up-xicon">
-        <span class="xicon up-img"></span>
-        <span v-if="supportMedia" class="xicon up-voice" @click="toggleRecord"></span>
+        <div class="up-xicon">
+          <span class="xicon up-img"></span>
+          <span v-if="supportMedia" class="xicon up-voice" @click="toggleRecord"></span>
+        </div>
       </div>
       <!-- <div class="extra-oprs">
         <i class="xicon xicon-up opr-item"></i>
@@ -98,7 +98,6 @@
   .inputer {
     height: e('calc(100% - 0.9rem)');
     padding: 0 0.4rem;
-    border-bottom: 1px solid @color-light;
     .detail, .title {
       width: 100%;
       outline: none;
@@ -114,6 +113,7 @@
       height: 5.5rem;
       padding-top: 0.5rem;
       resize: none;
+      border-bottom: 1px solid @color-light;
     }
   }
 

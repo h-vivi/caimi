@@ -39,6 +39,8 @@ axios.interceptors.response.use(response => {
 //   })
 // }
 
+// jsonpWrapper('/config/init')
+
 export const loadCategories = function () {
   return axios.get('config/init')
   // return jsonpWrapper('config/init')
