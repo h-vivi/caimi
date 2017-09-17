@@ -15,14 +15,14 @@
         @click.native="handleClick(setting)"
       ></setting-item>
     </ul>
-    <!--<ul class="mine-setting-module" >
+    <ul class="mine-setting-module" >
       <setting-item
         v-for="(setting, index) in settings2"
         :item="setting"
         :key="index"
         @click.native="handleClick(setting)"
       ></setting-item>
-    </ul>-->
+    </ul>
   </div>
 </template>
 
@@ -39,6 +39,15 @@
             icon: 'story',
             route: {
               name: 'storyList'
+            }
+          }
+        ],
+        settings2: [
+          {
+            name: '设置',
+            icon: 'set',
+            route: {
+              name: 'settings'
             }
           }
         ]

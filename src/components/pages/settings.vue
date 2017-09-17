@@ -30,14 +30,21 @@
         settings: [
           {
             name: '头像',
+            className: 'avatar',
             avatar: ''
           },
           {
             name: '用户名',
+            className: 'nick-name',
             extra: '棉花糖'
           },
           {
+            name: '设置密码',
+            className: 'set-psd'
+          },
+          {
             name: '简介',
+            className: 'synopsis',
             extra: '鲜花怒马少年时 一日看尽长安花'
           }
         ]
@@ -62,6 +69,9 @@
   .settings {
     height: 100%;
     background: @color-light;
+    .avatar {
+      height: 2.13rem;
+    }
   }
 
   .items {

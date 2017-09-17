@@ -1,5 +1,5 @@
 <template lang="html">
-  <li class="setting-item">
+  <li class="setting-item" :class=item.className>
     <i v-if="item.icon" alt="" :class="'xicon xicon-setting ' + item.icon"></i>
     <div class="content">
       <div>{{ item.name }}</div>
@@ -33,9 +33,13 @@ export default {
       display: flex;
       height: 1.6rem;
       &:last-child {
-        .setting-name {
+        .content {
           border-bottom: none;
         }
+      }
+      .center {
+        color: @color-middle;
+        font-size: @font-size-middle;
       }
     }
     .xicon-setting {
@@ -44,6 +48,13 @@ export default {
       background-repeat: no-repeat;
       background-position: 0 center;
       margin-right: 0.1rem;
+    }
+    .avatar {
+      .center {
+        height: 1.3rem;
+        float: right;
+        border: 1px solid red;
+      }
     }
     .story {
       background-image: url(../../assets/xicon-story.png);
@@ -79,8 +90,9 @@ export default {
     }
     .right {
       display: inline-block;
-      width: 14px;
-      height: 30px;
+      width: 10px;
+      height: 20px;
       background: url(../../assets/go.png) no-repeat;
+      background-size: 100%;
     }
 </style>
