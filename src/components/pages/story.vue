@@ -9,7 +9,7 @@
           <input type="file" multiple accept=".jpg,.png,.jpeg,.bmp" class="up-img" @change="uploadImg"></span>
           <span class="xicon up-img-placeholder"></span>
           <span v-if="supportMedia" class="xicon up-voice" @click="toggleRecord"></span>
-          <span class="xicon up-img-placeholder" @click="toggleCategory">读信</span>
+          <span class="xicon choose-category" @click="toggleCategory"></span>
           <mt-actionsheet v-model="showSht" :actions="actions"></mt-actionsheet>
         </div>
       </div>
@@ -132,7 +132,7 @@
     beforeCreate () {
       const isLogin = Cookie.get('isLogin')
       if (isLogin !== 'true') {
-        this.$router.push({ name: 'login' })
+        // this.$router.push({ name: 'login' })
       }
     },
     beforeDestroy () {
@@ -213,7 +213,11 @@
       z-index: 1;
     }
     .up-voice {
+      margin-right: 0.6rem;
       background-image: url(../../assets/upVoice.png);
+    }
+    .choose-category {
+      background-image: url(../../assets/upImg.png);
     }
   }
 </style>
