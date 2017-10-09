@@ -15,7 +15,7 @@
         @click.native="handleClick(setting)"
       ></setting-item>
     </ul>
-    <ul class="mine-setting-module" >
+    <ul class="mine-setting-module">
       <setting-item
         v-for="(setting, index) in settings2"
         :item="setting"
@@ -28,6 +28,7 @@
 
 <script>
   import SettingItem from '@/components/common/setting-item'
+  import Cookie from 'js-cookie'
 
   export default {
     name: 's',
@@ -61,6 +62,12 @@
         if (item.route) {
           this.$router.push(item.route)
         }
+      }
+    },
+    beforeCreate () {
+      const isLogin = Cookie.get('isLogin')
+      if (isLogin !== 'true') {
+        this.$router.push({ name: 'login' })
       }
     }
   }
