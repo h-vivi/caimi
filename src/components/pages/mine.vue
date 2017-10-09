@@ -28,7 +28,6 @@
 
 <script>
   import SettingItem from '@/components/common/setting-item'
-  import Cookie from 'js-cookie'
   import { mapGetters } from 'vuex'
 
   export default {
@@ -73,12 +72,6 @@
         if (item.route) {
           this.$router.push(item.route)
         }
-      }
-    },
-    beforeCreate () {
-      const isLogin = Cookie.get('isLogin')
-      if (isLogin !== 'true') {
-        this.$router.push({ name: 'login' })
       }
     }
   }

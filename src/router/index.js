@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Cookie from 'js-cookie'
 
 import Login from '@/components/pages/login'
 import Rename from '@/components/pages/rename'
@@ -25,7 +26,7 @@ Vue.use(Router)
  * 设置
  */
 
-export default new Router({
+var router = new Router({
   // mode: 'history',
   routes: [
     {
@@ -106,3 +107,15 @@ export default new Router({
     }
   }
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.name === 'mine' || to.name === 'story') {
+    if (Cookie.get('isLogin') !== 'true') {
+      next({ name: 'login' })
+      return
+    }
+  }
+  next()
+})
+
+export default router
