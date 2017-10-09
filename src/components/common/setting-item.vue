@@ -1,7 +1,7 @@
 <template lang="html">
   <li class="setting-item" :class=item.className>
     <i v-if="item.icon" alt="" :class="'xicon xicon-setting ' + item.icon"></i>
-    <div class="content">
+    <div class="content" @click="handleClick">
       <div>{{ item.name }}</div>
       <div class="center"><slot></slot></div>
       <i class="right"></i>
@@ -13,8 +13,13 @@
 export default {
   name: 'setting-item',
   data () {
-    return {
-      msg: ''
+    return { }
+  },
+  methods: {
+    handleClick () {
+      if (this.item.isLink) {
+        this.$router.push({ name: this.item.routeName })
+      }
     }
   },
   props: {

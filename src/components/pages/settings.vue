@@ -36,7 +36,9 @@
           {
             name: '用户名',
             className: 'nick-name',
-            extra: '棉花糖'
+            extra: '棉花糖',
+            isLink: true,
+            routeName: 'rename'
           },
           {
             name: '设置密码',

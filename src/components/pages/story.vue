@@ -28,6 +28,7 @@
   import HeaderWithBack from '@/components/common/header-with-back'
   import { sendStory, uploadVoice, uploadImages } from '@/api'
   import XRecorder from '@/utils/xrecorder'
+  import Cookie from 'js-cookie'
 
   const supportMedia = XRecorder.isSupportGetUserMedia()
 
@@ -127,6 +128,19 @@
     },
     components: {
       HeaderWithBack
+    },
+    beforeCreate () {
+      const isLogin = Cookie.get('isLogin')
+      if (isLogin !== 'true') {
+        this.$router.push({ name: 'login' })
+      }
+    },
+    beforeDestroy () {
+      try {
+        this.recorder.worker.terminate()
+      } catch (ex) {
+        /* Ignore */
+      }
     }
   }
 </script>

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Login from '@/components/pages/login'
-// import Register from '@/components/pages/register'
+import Rename from '@/components/pages/rename'
 import Findpsw from '@/components/pages/findpsw'
 import Resetpsw from '@/components/pages/resetpsw'
 import S from '@/components/pages/s'
@@ -38,11 +38,11 @@ export default new Router({
       name: 'resetpsw',
       component: Resetpsw
     },
-    // {
-      // path: '/register',
-      // name: 'register',
-      // component: Register
-    // },
+    {
+      path: '/rename',
+      name: 'rename',
+      component: Rename
+    },
     {
       path: '/findpsw',
       name: 'findpsw',
