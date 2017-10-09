@@ -8,6 +8,7 @@
         @item-content-click="toDetail(essay)"
         :item="essay"
         :key="essay.contentId"
+        :showFollow="true"
       ></essay-desc-item>
     </div>
   </div>

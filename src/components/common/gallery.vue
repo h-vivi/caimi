@@ -52,12 +52,14 @@
   }
 
   .mode-1 {
+    max-height: 7.46rem;
     .image-item {
       width: 100%;
     }
   }
 
   .mode-2 {
+    max-height: 3.73rem;
     .image-item {
       width: 49.5%;
     }
@@ -67,6 +69,7 @@
   }
 
   .mode-3 {
+    max-height: 7.46rem;
     .image-item {
       float: left;
     }
@@ -84,6 +87,7 @@
   }
 
   .mode-4 {
+    max-height: 7.46rem;
     .image-item {
       width: 49.5%;
     }

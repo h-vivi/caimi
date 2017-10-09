@@ -25,7 +25,7 @@
         this.$router.back()
       },
       rename () {
-        renameAction({ phone: 18297927925, nickname: this.nick })
+        renameAction({ nickname: this.nick })
           .then(res => {
             if (!res.success) {
               this.$toast('重命名失败')

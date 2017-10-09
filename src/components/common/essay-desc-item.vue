@@ -1,7 +1,7 @@
 <template>
   <div class="essay-desc-item">
     <template v-if="item.type === 'content'">
-      <user-header class="user-header-container" :user-info="item.userInfo"></user-header>
+      <user-header class="user-header-container" :user-info="item.userInfo" :showFollow="showFollow" :showOpr="showOpr" @show-opr-sht="emitShowSht"></user-header>
       <div class="content-wrapper" @click="handleOnContentClick">
         <div class="gallery-wrapper">
           <gallery :images="item.images"></gallery>
@@ -44,13 +44,20 @@
         default () {
           return { userInfo: { }, images: [ ] }
         }
-      }
+      },
+      showFollow: {
+        required: true
+      },
+      showOpr: { }
     },
     components: {
       Gallery,
       UserHeader
     },
     methods: {
+      emitShowSht () {
+        this.$emit('show-opr-sht')
+      },
       handleOnContentClick () {
         this.$emit('item-content-click', this.item)
       },

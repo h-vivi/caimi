@@ -11,7 +11,7 @@
             </div>
             <div class="essay-content">
               <div class="text-content" v-html="essayDetail.content"></div>
-              <gallery :images="essayDetail.images"></gallery>
+              <!-- <gallery :images="essayDetail.images"></gallery> -->
             </div>
           </div>
           <div class="detail-item essay-opr">
@@ -205,11 +205,17 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="less">
+  .essay-content {
+    img {
+      width: 100%;
+    }
+  }
+</style>
 <style scoped lang="less">
   @import '~styles/vars.less';
 
   @common-gap: 0.66rem;
-
   .detail {
     height: 100%;
     overflow: hidden;

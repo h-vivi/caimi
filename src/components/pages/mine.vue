@@ -5,7 +5,7 @@
         <h2>我的</h2>
       </div>
       <div class="mine-avatar"></div>
-      <router-link class="mine-sign" :to="{ name: 'login' }">登录彩米</router-link>
+      <router-link v-if="!isLogin" class="mine-sign" :to="{ name: 'login' }">登录彩米</router-link>
     </div>
     <ul class="mine-setting-module" >
       <setting-item
@@ -29,6 +29,7 @@
 <script>
   import SettingItem from '@/components/common/setting-item'
   import Cookie from 'js-cookie'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 's',
@@ -40,6 +41,13 @@
             icon: 'story',
             route: {
               name: 'storyList'
+            }
+          },
+          {
+            name: '我的收藏',
+            icon: 'collect',
+            route: {
+              name: 'collectList'
             }
           }
         ],
@@ -57,6 +65,9 @@
     components: {
       SettingItem
     },
+    computed: {
+      ...mapGetters(['isLogin'])
+    },
     methods: {
       handleClick (item) {
         if (item.route) {
@@ -67,7 +78,7 @@
     beforeCreate () {
       const isLogin = Cookie.get('isLogin')
       if (isLogin !== 'true') {
-        this.$router.push({ name: 'login' })
+        // this.$router.push({ name: 'login' })
       }
     }
   }

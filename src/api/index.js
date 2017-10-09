@@ -9,8 +9,9 @@ import axios from 'axios'
 import { toLogin } from '@/utils'
 
 axios.defaults.withCredentials = true
-// axios.defaults.baseURL = 'http://api.caimixinli.com/serverapi/'
-axios.defaults.baseURL = '/serverapi'
+axios.defaults.baseURL = process.env.NODE_ENV === 'development'
+                         ? '/serverapi'
+                         : 'http://api.caimixinli.com/serverapi/'
 
 const UN_AUTH_CODE = 1022
 
@@ -39,11 +40,8 @@ axios.interceptors.response.use(response => {
 //   })
 // }
 
-// jsonpWrapper('/config/init')
-
 export const loadCategories = function () {
   return axios.get('config/init')
-  // return jsonpWrapper('config/init')
 }
 
 export const loadEssayList = function ({ pageNo, code }) {
@@ -53,16 +51,11 @@ export const loadEssayList = function ({ pageNo, code }) {
       categoryCode: code
     }
   })
-  // return jsonpWrapper('content/queryContent', {
-  //   pageNo,
-  //   categoryCode: code
-  // })
 }
 
-export const rename = function ({ phone, nickname }) {
+export const rename = function ({ nickname }) {
   return axios.get('userlogin/updateUser', {
     params: {
-      phone,
       nickname
     }
   })
@@ -72,18 +65,18 @@ export const loadStoryList = function ({ pageNo }) {
   return axios.get('content/queryMyContent', {
     params: { pageNo }
   })
-  // return jsonpWrapper('content/queryMyContent', {
-  //   pageNo
-  // })
+}
+
+export const loadCollectList = function ({ pageNo }) {
+  return axios.get('content/queryMyCollectContent', {
+    params: { pageNo }
+  })
 }
 
 export const getVerifyCode = function ({ phone }) {
   return axios.get('userlogin/getPhoneCheckCode', {
     params: { phone }
   })
-  // return jsonpWrapper('userlogin/getPhoneCheckCode', {
-  //   phone
-  // })
 }
 
 export const loginViaVerifyCode = function ({ phone, verifyCode }) {
@@ -93,10 +86,6 @@ export const loginViaVerifyCode = function ({ phone, verifyCode }) {
       phoneCheckCode: verifyCode
     }
   })
-  // return jsonpWrapper(`userlogin/loginNoPassword`, {
-  //   phone,
-  //   phoneCheckCode: verifyCode
-  // })
 }
 
 export const loginViaPsw = function ({ phone, psw }) {
@@ -106,55 +95,36 @@ export const loginViaPsw = function ({ phone, psw }) {
       password: psw
     }
   })
-  // return jsonpWrapper(`userlogin/loginPassword`, {
-  //   phone,
-  //   password: psw
-  // })
 }
 
 export const getEssayDetail = function ({ contentId }) {
   return axios.get('detail/contentDetail', {
     params: { contentId }
   })
-  // return jsonpWrapper('detail/contentDetail', {
-    // contentId
-  // })
 }
 
 export const submitFollowUser = function ({ followUserId }) {
   return axios.get('relation/followUser', {
     params: { followUserId }
   })
-  // return jsonpWrapper('relation/followUser', {
-  //   followUserId
-  // })
 }
 
 export const likeArticle = function ({ contentId }) {
   return axios.get('relation/likeContent', {
     params: { contentId }
   })
-  // return jsonpWrapper('relation/likeContent', {
-  //   contentId
-  // })
 }
 
 export const collectArticle = function ({ contentId }) {
   return axios.get('relation/collectContent', {
     params: { contentId }
   })
-  // return jsonpWrapper('relation/collectContent', {
-  //   contentId
-  // })
 }
 
 export const likeComment = function ({ commentId }) {
   return axios.get('relation/likeComment', {
     params: { commentId }
   })
-  // return jsonpWrapper('relation/likeComment', {
-  //   comentId: commentId
-  // })
 }
 
 export const sendStory = function ({ title, detail, voiceUrl, imageUrls }) {
@@ -172,16 +142,14 @@ export const sendStory = function ({ title, detail, voiceUrl, imageUrls }) {
       imageUrls
     }
   })
-  // return jsonpWrapper(`content/addContent`, {
-  //   title,
-  //   contentTxt: detail,
-  //   voiceUrl,
-  //   imageUrls
-  // })
 }
 
 export const uploadVoice = function ({ fd }) {
   return axios.post(`upload/uploadVoice`, fd)
+}
+
+export const uploadImages = function ({ fd }) {
+  return axios.post(`upload/uploadImages`, fd)
 }
 
 export const commentArticle = function ({
@@ -196,9 +164,12 @@ export const commentArticle = function ({
       commentContent
     }
   })
-  // return jsonpWrapper('comment/addComment', {
-  //   beCommentUserId,
-  //   contentId,
-  //   commentContent
-  // })
+}
+
+export const delContent = function ({ id }) {
+  return axios.get('content/delContent', {
+    params: {
+      contentId: id
+    }
+  })
 }

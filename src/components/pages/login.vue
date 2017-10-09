@@ -35,6 +35,7 @@
 
 <script>
   import { getVerifyCode, loginViaVerifyCode, loginViaPsw } from '@/api'
+  import { mapMutations } from 'vuex'
 
   export default {
     name: 'login',
@@ -48,6 +49,7 @@
       }
     },
     methods: {
+      ...mapMutations([ 'SET_USER' ]),
       back () {
         this.$router.back()
       },
@@ -103,6 +105,7 @@
               this.$toast(res.msg)
               return
             }
+            this.SET_USER({ user: { isLogin: true } })
             this.$router.push({ name: 's' })
           })
         .catch(ex => { /* Ignore */ })
