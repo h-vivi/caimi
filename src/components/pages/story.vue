@@ -9,7 +9,7 @@
           <input type="file" multiple accept=".jpg,.png,.jpeg,.bmp" class="up-img" @change="uploadImg"></span>
           <span class="xicon up-img-placeholder"></span>
           <span v-if="supportMedia" class="xicon up-voice" @click="toggleRecord"></span>
-          <span class="xicon up-img-placeholder" @click="toggleCategory">读信</span>
+          <span><span class="xicon choose-category" @click="toggleCategory"></span><span class="select-name">{{selectedCategory.name}}</span></span>
           <mt-actionsheet v-model="showSht" :actions="actions"></mt-actionsheet>
         </div>
       </div>
@@ -42,7 +42,7 @@
         mp3Name: '',
         supportMedia,
         showSht: false,
-        selectedCategoryCode: '',
+        selectedCategory: this.categories && this.categories[0] || { },
         recorder: new XRecorder({
           bitRate: 64,
           onComplete: function (data) {
@@ -80,7 +80,7 @@
     },
     methods: {
       selectCategory (item) {
-        this.selectedCategoryCode = item.code
+        this.selectedCategory = item
       },
       toggleRecord () {
         if (this.recording) {
@@ -96,7 +96,7 @@
           detail: this.detail,
           voiceUrl: this.voiceUrl,
           imageUrls: this.imageUrls.join('-'),
-          categoryCode: this.selectedCategoryCode
+          categoryCode: this.selectedCategory.code
         })
           .then(res => {
             if (!res.success) {
@@ -206,7 +206,16 @@
       z-index: 1;
     }
     .up-voice {
+      margin-right: 0.6rem;
       background-image: url(../../assets/upVoice.png);
+    }
+    .choose-category {
+      background-image: url(../../assets/upImg.png);
+    }
+    .select-name {
+      color: red;
+      font-size: @font-size-middle;
+      line-height: 0.9rem;
     }
   }
 </style>
