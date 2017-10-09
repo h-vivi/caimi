@@ -78,7 +78,7 @@
     beforeCreate () {
       const isLogin = Cookie.get('isLogin')
       if (isLogin !== 'true') {
-        // this.$router.push({ name: 'login' })
+        this.$router.push({ name: 'login' })
       }
     }
   }
