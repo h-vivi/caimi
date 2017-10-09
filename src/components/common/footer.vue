@@ -40,9 +40,7 @@
       flex-direction: column;
       align-items: center;
       width: 1rem;
-      .xicon {
-        margin-bottom: 0.1rem;
-      }
+      
       &.xicon-add {
         height: 100%;
       }

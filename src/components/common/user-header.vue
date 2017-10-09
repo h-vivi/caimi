@@ -5,10 +5,11 @@
       <div class="name">{{ userInfo.nickName }}</div>
       <slot></slot>
     </div>
-    <div class="right-wrapper" @click="toggleFollowStatus">
+    <div class="right-wrapper" @click="toggleFollowStatus" v-if="showFollow">
       <template v-if="userInfo.follow">已关注</template>
       <template v-else>+&nbsp;关注</template>
     </div>
+    <div class="right-wrapper" @click="showOprSht" v-if="showOpr">...</div>
   </div>
 </template>
 
@@ -19,6 +20,9 @@
   export default {
     name: 'user-header',
     methods: {
+      showOprSht () {
+        this.$emit('show-opr-sht')
+      },
       toggleFollowStatus () {
         if (this.userInfo.follow === true) {
           return
@@ -38,6 +42,16 @@
       userInfo: {
         type: Object,
         required: true
+      },
+      showFollow: {
+        default () {
+          return true
+        }
+      },
+      showOpr: {
+        default () {
+          return false
+        }
       }
     },
     components: {

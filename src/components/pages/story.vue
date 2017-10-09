@@ -6,7 +6,8 @@
         <input type="text" class="title" placeholder="添加标题" v-model="title">
         <textarea class="detail" placeholder="添加内容" v-model="detail"></textarea>
         <div class="up-xicon">
-          <span class="xicon up-img"></span>
+          <input type="file" multiple accept=".jpg,.png,.jpeg,.bmp" class="up-img" @change="uploadImg"></span>
+          <span class="xicon up-img-placeholder"></span>
           <span v-if="supportMedia" class="xicon up-voice" @click="toggleRecord"></span>
         </div>
       </div>
@@ -22,7 +23,7 @@
 
 <script>
   import HeaderWithBack from '@/components/common/header-with-back'
-  import { sendStory, uploadVoice } from '@/api'
+  import { sendStory, uploadVoice, uploadImages } from '@/api'
   import XRecorder from '@/utils/xrecorder'
 
   const supportMedia = XRecorder.isSupportGetUserMedia()
@@ -46,9 +47,17 @@
             const fd = new FormData()
             fd.append('file', file)
             uploadVoice({ fd })
+              .then(res => {
+                if (!res.success) {
+                  return
+                }
+                this.voiceUrl = res.data
+              })
             console.log('completed', ...arguments)
           }.bind(this)
-        })
+        }),
+        imageUrls: [ ],
+        voiceUrl: ''
       }
     },
     methods: {
@@ -63,7 +72,9 @@
       sendMyStory () {
         sendStory({
           title: this.title,
-          detail: this.detail
+          detail: this.detail,
+          voiceUrl: this.voiceUrl,
+          imageUrls: this.imageUrls.join('-')
         })
           .then(res => {
             if (!res.success) {
@@ -72,6 +83,21 @@
             this.$router.push({ name: 's::list' })
           })
           .catch(ex => { /* Ignore */ })
+      },
+      uploadImg (evt) {
+        const files = [].slice.call(evt.target.files)
+        const fd = new FormData()
+        files.forEach(x => fd.append('file', x))
+        uploadImages({ fd })
+          .then(res => {
+            if (!res.success) {
+              return
+            }
+            this.imageUrls.push(res.data)
+          })
+          .catch(ex => {
+            /* Ignore */
+          })
       }
     },
     components: {
@@ -129,14 +155,23 @@
   }
   .up-xicon {
     padding-left: 0.4rem;
-    span {
+    .xicon,
+    .up-img {
       width: 0.6rem;
       height: 0.9rem;
       float: left;
     }
     .up-img {
+      opacity: 0;
+      position: absolute;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .up-img-placeholder {
+      position: relative;
       margin-right: 0.6rem;
       background-image: url(../../assets/upImg.png);
+      z-index: 1;
     }
     .up-voice {
       background-image: url(../../assets/upVoice.png);

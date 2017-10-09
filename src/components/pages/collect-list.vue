@@ -2,26 +2,23 @@
   <div class="list">
     <div class="story-head">
       <div class="back xicon xicon-back-white" @click="back"></div>
-      我的故事
+      我的收藏
     </div>
     <div class="essays optimize-scroll" @scroll="scrollLoad">
       <essay-desc-item
         class="essay-desc-item"
         v-for="essay in essays"
         @item-content-click="toDetail(essay)"
-        @show-opr-sht="showOprSht(essay.contentId)"
         :item="essay"
         :key="essay.contentId"
-        :showFollow="false"
-        :showOpr="true"
+        :showFollow="true"
       ></essay-desc-item>
     </div>
-    <mt-actionsheet v-model="showSht" :actions="actions"></mt-actionsheet>
   </div>
 </template>
 
 <script>
-  import { loadStoryList, delContent } from '@/api'
+  import { loadCollectList } from '@/api'
   import EssayDescItem from '@/components/common/essay-desc-item'
   import { validScrollLoad } from '@/utils'
 
@@ -51,18 +48,6 @@
       EssayDescItem
     },
     methods: {
-      showOprSht (contentId) {
-        this.showSht = true
-        this.oprContentId = contentId
-      },
-      deleteStory () {
-        delContent({ id: this.oprContentId })
-          .then(res => {
-            if (!res.success) {
-              return
-            }
-          })
-      },
       back () {
         this.$router.back()
       },
@@ -73,16 +58,16 @@
         if (!validScrollLoad(this.essayListDom)) {
           return
         }
-        this.loadStory()
+        this.loadCollectList()
       },
-      loadStory () {
+      loadCollectList () {
         if (this.end || this.loading) {
           return Promise.resolve()
         }
 
         this.pageNo += 1
         this.loading = true
-        return loadStoryList({ pageNo: this.pageNo })
+        return loadCollectList({ pageNo: this.pageNo })
           .then(res => {
             if (!res.success) {
               throw new Error('fail')
@@ -103,7 +88,7 @@
       }
     },
     beforeMount () {
-      this.loadStory()
+      this.loadCollectList()
     }
   }
 </script>

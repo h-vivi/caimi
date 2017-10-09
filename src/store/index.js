@@ -16,6 +16,9 @@ export default new Vuex.Store({
     essayListScrollY: 0
   },
   mutations: {
+    SET_USER (state, { user }) {
+      state.user = user
+    },
     SET_CATEGORIES (state, { categories }) {
       state.categories = categories
     },
@@ -30,6 +33,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    isLogin: state => !!state.user.isLogin,
     categories: state => state.categories,
     essays: state => state.essays,
     essayListScrollY: state => state.essayListScrollY
