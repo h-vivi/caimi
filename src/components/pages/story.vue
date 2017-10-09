@@ -9,6 +9,8 @@
           <input type="file" multiple accept=".jpg,.png,.jpeg,.bmp" class="up-img" @change="uploadImg"></span>
           <span class="xicon up-img-placeholder"></span>
           <span v-if="supportMedia" class="xicon up-voice" @click="toggleRecord"></span>
+          <span class="xicon up-img-placeholder" @click="toggleCategory">读信</span>
+          <mt-actionsheet v-model="showSht" :actions="actions"></mt-actionsheet>
         </div>
       </div>
       <!-- <div class="extra-oprs">
@@ -22,6 +24,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import HeaderWithBack from '@/components/common/header-with-back'
   import { sendStory, uploadVoice, uploadImages } from '@/api'
   import XRecorder from '@/utils/xrecorder'
@@ -38,6 +41,8 @@
         src: '',
         mp3Name: '',
         supportMedia,
+        showSht: false,
+        selectedCategoryCode: '',
         recorder: new XRecorder({
           bitRate: 64,
           onComplete: function (data) {
@@ -60,7 +65,23 @@
         voiceUrl: ''
       }
     },
+    computed: {
+      ...mapGetters(['categories']),
+      actions () {
+        if (!Array.isArray(this.categories)) {
+          return [ ]
+        }
+        return this.categories.map(x => ({
+          name: x.name,
+          code: x.code,
+          method: this.selectCategory
+        }))
+      }
+    },
     methods: {
+      selectCategory (item) {
+        this.selectedCategoryCode = item.code
+      },
       toggleRecord () {
         if (this.recording) {
           this.recorder.stop()
@@ -74,7 +95,8 @@
           title: this.title,
           detail: this.detail,
           voiceUrl: this.voiceUrl,
-          imageUrls: this.imageUrls.join('-')
+          imageUrls: this.imageUrls.join('-'),
+          categoryCode: this.selectedCategoryCode
         })
           .then(res => {
             if (!res.success) {
@@ -98,6 +120,9 @@
           .catch(ex => {
             /* Ignore */
           })
+      },
+      toggleCategory () {
+        this.showSht = true
       }
     },
     components: {

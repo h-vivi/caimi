@@ -119,7 +119,7 @@ export const likeComment = function ({ commentId }) {
   })
 }
 
-export const sendStory = function ({ title, detail, voiceUrl, imageUrls }) {
+export const sendStory = function ({ title, detail, voiceUrl, imageUrls, categoryCode }) {
   if (!voiceUrl) {
     voiceUrl = ''
   }
@@ -131,7 +131,8 @@ export const sendStory = function ({ title, detail, voiceUrl, imageUrls }) {
       title,
       contentTxt: detail,
       voiceUrl,
-      imageUrls
+      imageUrls,
+      categoryCode
     }
   })
 }
