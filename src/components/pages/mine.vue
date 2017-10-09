@@ -29,11 +29,13 @@
 <script>
   import SettingItem from '@/components/common/setting-item'
   import { mapGetters } from 'vuex'
+  import { getUserInfo } from '@/api'
 
   export default {
     name: 's',
     data () {
       return {
+        userInfo: { },
         settings1: [
           {
             name: '我的故事',
@@ -73,6 +75,18 @@
           this.$router.push(item.route)
         }
       }
+    },
+    beforeMount () {
+      getUserInfo()
+        .then(res => {
+          if (!res.success) {
+            return
+          }
+          this.userInfo = res
+        })
+        .catch(ex => {
+          /* Ignore */
+        })
     }
   }
 </script>

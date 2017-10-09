@@ -174,3 +174,7 @@ export const delContent = function ({ id }) {
     }
   })
 }
+
+export const getUserInfo = function () {
+  return axios.get('userLogin/getUserInfo')
+}
