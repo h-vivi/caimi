@@ -12,6 +12,7 @@
 
 <script>
   import { rename as renameAction } from '@/api'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'rename',
@@ -25,7 +26,7 @@
         this.$router.back()
       },
       rename () {
-        renameAction({ nickname: this.nick })
+        renameAction({ phone: this.xuser && this.xuser.phone, nickname: this.nick })
           .then(res => {
             if (!res.success) {
               this.$toast('重命名失败')
@@ -37,6 +38,9 @@
             this.$toast('重命名失败')
           })
       }
+    },
+    computed: {
+      ...mapGetters([ 'xuser' ])
     }
   }
 </script>

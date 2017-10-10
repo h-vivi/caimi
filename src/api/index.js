@@ -53,9 +53,10 @@ export const loadEssayList = function ({ pageNo, code }) {
   })
 }
 
-export const rename = function ({ nickname }) {
+export const rename = function ({ phone, nickname }) {
   return axios.get('userlogin/updateUser', {
     params: {
+      phone,
       nickname
     }
   })
