@@ -33,6 +33,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    xuser: state => state.user,
     isLogin: state => !!state.user.isLogin,
     categories: state => state.categories,
     essays: state => state.essays,

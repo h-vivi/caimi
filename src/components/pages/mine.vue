@@ -7,7 +7,7 @@
       <div class="mine-avatar">
         <img v-if="userInfo.isLogin" :src="userInfo.avatar">
       </div>
-      <template v-if="!userInfo.isLogin"><div class="mine-sign">{{ userInfo.nickname }}</div></template>
+      <template v-if="userInfo.isLogin"><div class="mine-sign">{{ userInfo.nickname }}</div></template>
       <template v-else>
         <router-link class="mine-sign" :to="{ name: 'login' }">登录彩米</router-link>
       </template>

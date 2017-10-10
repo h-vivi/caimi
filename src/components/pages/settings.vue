@@ -60,9 +60,9 @@
       }
     },
     computed: {
-      ...mapGetters([ 'xusers' ]),
+      ...mapGetters([ 'xuser' ]),
       settings () {
-        if (!this.xusers) {
+        if (!this.xuser) {
           return defaultSettings.slice()
         }
         return defaultSettings.map((x, i) => {
