@@ -176,5 +176,5 @@ export const delContent = function ({ id }) {
 }
 
 export const getUserInfo = function () {
-  return axios.get('userLogin/getUserInfo')
+  return axios.get('userlogin/getUserInfo')
 }

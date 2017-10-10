@@ -4,8 +4,13 @@
       <div class="mine-info-top">
         <h2>我的</h2>
       </div>
-      <div class="mine-avatar"></div>
-      <router-link v-if="!isLogin" class="mine-sign" :to="{ name: 'login' }">登录彩米</router-link>
+      <div class="mine-avatar">
+        <img v-if="userInfo.isLogin" :src="userInfo.avatar">
+      </div>
+      <template v-if="!userInfo.isLogin"><div class="mine-sign">{{ userInfo.nickname }}</div></template>
+      <template v-else>
+        <router-link class="mine-sign" :to="{ name: 'login' }">登录彩米</router-link>
+      </template>
     </div>
     <ul class="mine-setting-module" >
       <setting-item
@@ -28,7 +33,7 @@
 
 <script>
   import SettingItem from '@/components/common/setting-item'
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
   import { getUserInfo } from '@/api'
 
   export default {
@@ -70,6 +75,7 @@
       ...mapGetters(['isLogin'])
     },
     methods: {
+      ...mapMutations(['SET_USER']),
       handleClick (item) {
         if (item.route) {
           this.$router.push(item.route)
@@ -82,7 +88,9 @@
           if (!res.success) {
             return
           }
-          this.userInfo = res
+          this.userInfo = res.data
+          this.userInfo.isLogin = true
+          this.SET_USER({ user: this.userInfo })
         })
         .catch(ex => {
           /* Ignore */
@@ -113,6 +121,12 @@
         border-radius: 50%;
         margin: -0.6rem auto 0;
         background: pink;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
       }
       .mine-sign {
         display: inline-block;

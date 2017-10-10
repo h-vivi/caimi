@@ -1,5 +1,5 @@
 <template lang="html">
-  <li class="setting-item" :class=item.className>
+  <li class="setting-item" :class="item.className">
     <i v-if="item.icon" alt="" :class="'xicon xicon-setting ' + item.icon"></i>
     <div class="content" @click="handleClick">
       <div>{{ item.name }}</div>
@@ -58,7 +58,6 @@ export default {
       .center {
         height: 1.3rem;
         float: right;
-        border: 1px solid red;
       }
     }
     .story {
