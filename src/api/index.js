@@ -11,7 +11,7 @@ import { toLogin } from '@/utils'
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = process.env.NODE_ENV === 'development'
                          ? '/serverapi'
-                         : 'http://api.caimixinli.com/serverapi/'
+                         : 'http://h5.caimixinli.com/serverapi/'
 
 const UN_AUTH_CODE = 1022
 
