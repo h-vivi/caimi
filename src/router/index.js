@@ -109,7 +109,7 @@ var router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name === 'mine' || to.name === 'story') {
+  if (to.name === 's::mine' || to.name === 'story') {
     if (Cookie.get('isLogin') !== 'true') {
       next({ name: 'login' })
       return
