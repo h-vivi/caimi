@@ -9,7 +9,7 @@
           <input type="file" multiple accept=".jpg,.png,.jpeg,.bmp" class="up-img" @change="uploadImg"></span>
           <span class="xicon up-img-placeholder"></span>
           <span v-if="supportMedia" class="xicon up-voice" @click="toggleRecord"></span>
-          <span><span class="xicon choose-category" @click="toggleCategory"></span><span class="select-name">{{selectedCategory.name}}</span></span>
+          <span @click="toggleCategory">分类选择：<span class="select-name">{{selectedCategory.name}}</span></span>
           <mt-actionsheet v-model="showSht" :actions="actions"></mt-actionsheet>
         </div>
       </div>
@@ -208,9 +208,6 @@
     .up-voice {
       margin-right: 0.6rem;
       background-image: url(../../assets/upVoice.png);
-    }
-    .choose-category {
-      background-image: url(../../assets/upImg.png);
     }
     .select-name {
       color: red;

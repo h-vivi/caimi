@@ -131,7 +131,7 @@
 
   .desc {
     color: @color-deep;
-    font-size: @font-size-middle;
+    font-size: @font-size-large;
     padding: 0.66rem 0;
     margin: 0 0.4rem;
     line-height: 0.53rem;
