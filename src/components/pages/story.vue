@@ -6,9 +6,9 @@
         <input type="text" class="title" placeholder="添加标题" v-model="title">
         <textarea class="detail" placeholder="添加内容" v-model="detail"></textarea>
         <div class="up-xicon">
-          <input type="file" multiple accept=".jpg,.png,.jpeg,.bmp" class="up-img" @change="uploadImg"></span>
+          <input type="file" accept=".jpg,.png,.jpeg,.bmp" class="up-img" @change="uploadImg"></span>
           <span class="xicon up-img-placeholder"></span>
-          <span v-if="supportMedia" class="xicon up-voice" @click="toggleRecord"></span>
+          <span v-if="supportMedia" class="xicon up-voice" v-show="false" @click="toggleRecord"></span>
           <span @click="toggleCategory">分类选择：<span class="select-name">{{selectedCategory.name}}</span></span>
           <mt-actionsheet v-model="showSht" :actions="actions"></mt-actionsheet>
         </div>
@@ -187,6 +187,7 @@
   }
   .up-xicon {
     padding-left: 0.4rem;
+    position: relative;
     .xicon,
     .up-img {
       width: 0.6rem;
@@ -198,6 +199,7 @@
       position: absolute;
       z-index: 2;
       overflow: hidden;
+      left: 0.4rem;
     }
     .up-img-placeholder {
       position: relative;
@@ -211,7 +213,7 @@
     }
     .select-name {
       color: red;
-      font-size: @font-size-middle;
+      font-size: @font-size-large;
       line-height: 0.9rem;
     }
   }
